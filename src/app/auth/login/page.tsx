@@ -1,10 +1,11 @@
-'use client'
+"use client"
 import { RequiredField } from "@/app/helpers/validation";
 import { Button, Form, message } from "antd"
 import axios from "axios";
 import Link from "next/link"
-import { useRouter } from 'next/navigation';
 import React from "react";
+import Router, { useRouter } from "next/navigation";
+
 
 interface userType {
     username: string;

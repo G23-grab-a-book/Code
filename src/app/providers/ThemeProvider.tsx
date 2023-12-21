@@ -3,11 +3,13 @@ import { ConfigProvider } from "antd";
 
 function ThemeProvider({ children }: { children: React.ReactNode }) {
     return (
-        <div><ConfigProvider theme={{
+        <div>
+            <ConfigProvider theme={{
                     token: {
                         colorPrimary: '#000',
                     }
-                }}>{children}
+                }}>
+                {children}
             
             </ConfigProvider>
         </div>
