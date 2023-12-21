@@ -1,4 +1,4 @@
-import { connectDB } from "../../../../dbConfig";
+import { connectDB } from "../../../../../dbConfig";
 import User from "@/app/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
@@ -7,9 +7,11 @@ connectDB();
 
 export async function POST(request: NextRequest) {
     try {
+        
         const reqBody = await request.json();
         //check if the user already exists
         const userExists = await User.findOne({ email: reqBody.email });
+        
         if (userExists) {
             throw new Error("User already exists");
         }
@@ -25,6 +27,13 @@ export async function POST(request: NextRequest) {
             message: "User created successfully",
             data: newUser,
         })
-    } catch (error) {
-        return NextResponse.error();
-} }
+    } catch (error: any) {
+        return NextResponse.json({
+                message: error.message,
+            },
+                {
+                    status: 400
+                }
+            );
+    }
+}
