@@ -1,6 +1,5 @@
 import { Double } from "mongodb";
 import mongoose from "mongoose";
-import userModel from "./userModel";
 export const announceSchema = new mongoose.Schema({
         title: {
             type: String,
@@ -27,7 +26,7 @@ export const announceSchema = new mongoose.Schema({
             required: true,
         },
         seller: {
-            type: userModel, // lasciamo userModel o id?
+            type: String, 
             required: true,
         },
 
