@@ -4,7 +4,7 @@ import {Button, Form, message, Select} from "antd"
 import axios from "axios";
 import Link from "next/link"
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react'
+import React from 'react'
 
 interface annuncioType {
     title: string;
@@ -26,7 +26,9 @@ function AddAnnuncio () {
             console.log(res.data.data._id);
             router.push("/annunci/"+id);
         } catch (error: any) {
+            message.error("Please log in");
             message.error(error.response.data.message);
+
         }
     };
 
@@ -50,13 +52,17 @@ function AddAnnuncio () {
                     </Form.Item>
                     <Form.Item name="category" label="Category"
                                rules={RequiredField('Please choose the category')}
-                               initialValue={'university'}>
+                               initialValue={'other'}>
                         <select>
                             <option value="university">University</option>
                             <option value="action">Action</option>
                             <option value="horror">Horror</option>
                             <option value="non-fiction">Non-Fiction</option>
                             <option value="comic">Comic</option>
+                            <option value="fantasy">Fantasy</option>
+                            <option value="science">Science</option>
+                            <option value="mystery">Mystery</option>
+                            <option value="other">Other</option>
                         </select>
                     </Form.Item>
                     <Form.Item name="ISBN" label="ISBN"
@@ -79,16 +85,12 @@ function AddAnnuncio () {
                             <option value="damaged">Damaged</option>
                         </select>
                     </Form.Item>
-                    <Form.Item name="seller" label="Seller"
-                               rules={RequiredField('placeholder seller')}
-                               initialValue={'placeholder'}>
-                        <input type='text' />
-                    </Form.Item>
 
                     <Button type='primary' htmlType='submit' block>
                         Post the ad
                     </Button>
                 </Form>
+                <Link href={"/"}>Back to home</Link>
             </div>
         </div>
 
