@@ -71,7 +71,7 @@ export default function Search() {
             ) : (
                 <ul>
                     {announcements.map((announcement) => (
-                        <a href={`/announcement/${announcement.id}`} key={announcement.id}>
+                        <a href={`/annunci/${announcement.id}`} key={announcement.id}>
                             <li key={announcement.id} style={{ display: 'flex', marginBottom: '1em' }}>
                                 <img src={announcement.image} alt={announcement.title} width="200" height="200" />
                                 <div style={{ marginLeft: '1em' }}>
