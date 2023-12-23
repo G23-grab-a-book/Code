@@ -20,9 +20,11 @@ function AddAnnuncio () {
     const onAddAnnuncio = async (values: annuncioType) => {
         console.log(values);
         try {
-            await axios.post("/api/annunci/new", values);
+            const res = await axios.post("/api/annunci/new", values);
             message.success("Successfully added post");
-            //router.push("/auth/login");//visualizza annuncio appena creato
+            const id = res.data.data._id;
+            console.log(res.data.data._id);
+            router.push("/annunci/"+id);
         } catch (error: any) {
             message.error(error.response.data.message);
         }
@@ -48,7 +50,7 @@ function AddAnnuncio () {
                     </Form.Item>
                     <Form.Item name="category" label="Category"
                                rules={RequiredField('Please choose the category')}
-                               initialValue={''}>
+                               initialValue={'university'}>
                         <select>
                             <option value="university">University</option>
                             <option value="action">Action</option>
@@ -69,7 +71,7 @@ function AddAnnuncio () {
                     </Form.Item>
                     <Form.Item name="condition" label="Condition"
                                rules={RequiredField('Please choose the condition')}
-                               initialValue={''}>
+                               initialValue={'new'}>
                         <select>
                             <option value="new">New</option>
                             <option value="good">Good</option>
