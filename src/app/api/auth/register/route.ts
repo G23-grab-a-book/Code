@@ -10,10 +10,14 @@ export async function POST(request: NextRequest) {
         
         const reqBody = await request.json();
         //check if the user already exists
-        const userExists = await User.findOne({ email: reqBody.email });
-        
+        const emailExists = await User.findOne({ email: reqBody.email });
+        const userExists = await User.findOne({ username: reqBody.username });
+
+        if (emailExists) {
+            throw new Error("Email already exists");
+        }
         if (userExists) {
-            throw new Error("User already exists");
+            throw new Error("Username already exists");
         }
         // create new user
         // random string

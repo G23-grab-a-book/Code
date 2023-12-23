@@ -5,7 +5,9 @@ export async function middleware(request: NextRequest) {
     console.log("middleware executed: " + request.nextUrl.pathname);
     let publicRoute = false;
     if(request.nextUrl.pathname == "/auth/login" ||
-        request.nextUrl.pathname == "/auth/register"){
+        request.nextUrl.pathname == "/auth/register" ||
+        //request.nextUrl.pathname == "/annunci/search" ||
+        request.nextUrl.pathname == "/"){
         publicRoute = true;
     }
 
@@ -28,5 +30,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ["/auth/login", "/auth/register", "/"],
+    matcher: ["/auth/login", "/auth/register","/",], //aggiungere le rotte
 };
