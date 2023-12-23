@@ -1,52 +1,53 @@
-"use client"
-
-import User from "@/app/models/userModel";
+"use client";
+import { Button, Form, message, Spin } from "antd";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Button, Form, message } from "antd";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { revalidatePath } from "next/cache";
 
 function Profile() {
-    const [disable, setDisable] = useState([
-        {
-            disabled: true,
-        }
-    ]);
+    const [disable, setDisable] = useState(true);
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [loading, setLoading] = useState(true); // Stato per il caricamento
     function enable() {
         setDisable(false);
     }
 
-    let username: string = "";
-    let email: string = "";
-
-    async function getInfo() {
-        if (username == "") {
+    useEffect(() => {
+        async function getInfo() {
             try {
                 const response = await axios.get("/api/user");
-                username = response.data.data.username;
-                email = response.data.data.email;
-            } catch (error: any) {
-                message.error(error.response);
+                setUsername(response.data.data.username);
+                setEmail(response.data.data.email);
+                setLoading(false); // Segnala che il caricamento è completato
+            } catch (error) {
+                message.error((error as any).response?.data?.message || "Errore nel recupero dei dati");
+                setLoading(false); // Segnala che il caricamento è completato anche in caso di errore
             }
         }
-        console.log(username);
-        console.log(email);
-    };
 
-    getInfo();
+        getInfo();
+    }, []);
 
     const onModify = async (values: any) => {
         try {
             await axios.patch("/api/user", values);
             message.success("Account modificato con successo!");
-        } catch (error: any) {
-            message.error(error.response.data.message);
+        } catch (error) {
+            message.error((error as any).response?.data?.message || "Si è verificato un errore durante la modifica dell'account");
         }
     };
 
+    if (loading) {
+        // centra l'indicatore di caricamento
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <Spin size="large" />
+            </div>
+        );
+    }
+
     return (
-        <div>
+        <div className="flex justify-center items-center h-screen">
             <div className="">
                 <Form className='w-[500px]' layout='vertical' onFinish={onModify}>
                     <h1 className='text-2x1 font-bold'>Profilo</h1>
@@ -77,6 +78,7 @@ function Profile() {
                 </Form>
             </div>
         </div>
-    )
+    );
 }
-export default Profile
+
+export default Profile;
