@@ -30,5 +30,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ["/auth/login", "/auth/register","/",], //aggiungere le rotte
+    matcher: ["/auth/login", "/auth/register","/","/annunci/new"], //aggiungere le rotte
 };
