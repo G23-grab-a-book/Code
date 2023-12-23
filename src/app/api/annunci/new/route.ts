@@ -1,7 +1,6 @@
 import { connectDB } from "../../../../../dbConfig";
 import Ad from "@/app/models/announceModel";
 import { NextRequest, NextResponse } from "next/server";
-import bcrypt from "bcryptjs";
 
 connectDB();
 
