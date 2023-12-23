@@ -19,6 +19,8 @@ pnpm dev
 bun dev
 ```
 
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
+
 ---
 
 Made by G23 - Alessandro Cornella, Alessio Paolazzi, Morgana Pasquini
