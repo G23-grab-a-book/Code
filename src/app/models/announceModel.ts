@@ -1,4 +1,3 @@
-import { Double } from "mongodb";
 import mongoose from "mongoose";
 export const announceSchema = new mongoose.Schema({
         title: {
