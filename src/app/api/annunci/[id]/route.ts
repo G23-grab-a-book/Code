@@ -6,7 +6,7 @@ connectDB();
 export async function GET(request: NextRequest, {params}: {params:{id:string}}){
     try{
         const ad = await Ad.findOne({_id: params.id});
-        return NextResponse.json(ad);
+        return NextResponse.json(ad, {status:200});
     }catch (error: any) {
         return NextResponse.json({ message: error.message }, { status: 500 });
     }
