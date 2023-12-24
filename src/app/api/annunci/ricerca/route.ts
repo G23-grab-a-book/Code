@@ -66,7 +66,7 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({
             message: "Search completed successfully",
             data: AnnunceList,
-        })
+        },{status:200})
     } catch (error: any) {
         console.log(error);
         return NextResponse.json({
