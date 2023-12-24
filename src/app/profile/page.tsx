@@ -2,12 +2,15 @@
 import { Button, Form, message, Spin } from "antd";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { RequiredField } from "../helpers/validation";
 
 function Profile() {
+    
     const [disable, setDisable] = useState(true);
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(true); // Stato per il caricamento
+    
     function enable() {
         setDisable(false);
     }
@@ -54,16 +57,16 @@ function Profile() {
                     <hr />
                     <br />
 
-                    <Form.Item name="username" label="Username" initialValue={username} >
+                    <Form.Item name="username" label="Username" initialValue={username} rules={RequiredField('Please insert the username')} >
                         <input type='text' disabled={disable}/>
 
                     </Form.Item>
 
-                    <Form.Item name="email" label="Email" initialValue={email}>
+                    <Form.Item name="email" label="Email" initialValue={email} rules={RequiredField('Please insert the email')}>
                         <input type='email' disabled={disable} />
                     </Form.Item>
 
-                    <Form.Item name="password" label="Password">
+                    <Form.Item name="password" label="Password" initialValue={''}>
                         <input type='password' disabled={disable} />
                     </Form.Item>
 

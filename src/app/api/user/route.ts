@@ -8,26 +8,42 @@ connectDB();
 
 export async function PATCH(request: NextRequest) {
     try {
-
         const reqBody = await request.json();
-        //check if the user already exists
-        const userExists = await User.findOne({ email: reqBody.email });
 
-        if (userExists) {
-            throw new Error("User already exists");
+        const userId = await validateJWT(request);
+        // retrieve the user without the password
+        const user = await User.findById(userId).select("-password");
+
+        if (user.email != reqBody.email) {
+            const userExists = await User.findOne({ email: reqBody.email });
+
+            if (userExists) {
+                throw new Error("La nuova email è già collegata ad un altro account");
+            } else {
+                user.email = reqBody.email;
+            }
         }
-        // create new user
-        // random string
-        const salt = await bcrypt.genSalt(10);
-        // hashing the pwd
-        const hashedPassword = await bcrypt.hash(reqBody.password, salt);
-        reqBody.password = hashedPassword;
-        const newUser = new User(reqBody);
-        await newUser.save();
+        if (user.username != reqBody.username) {
+            const userExists = await User.findOne({ username: reqBody.username });
+
+            if (userExists) {
+                throw new Error("Il nuovo username è già collegato ad un altro account");
+            } else {
+                user.username = reqBody.username;
+            }
+        }
+
+        if(reqBody.password != '') {
+            const salt = await bcrypt.genSalt(10);
+            // hashing the pwd
+            const hashedPassword = await bcrypt.hash(reqBody.password, salt);
+            user.password = hashedPassword;    
+        }
+        
+        await user.save();
         return NextResponse.json({
-            message: "User created successfully",
-            data: newUser,
-        })
+            message: "Account aggiornato correttamente!",
+        }, {status: 200})
     } catch (error: any) {
         return NextResponse.json({
             message: error.message,
@@ -49,8 +65,8 @@ export async function GET(request: NextRequest) {
         });
     } catch (error: any) {
         return NextResponse.json({
-                message: "Unauthorized",//error.message,
-            },
+            message: "Unauthorized",//error.message,
+        },
             {
                 status: 401,
             }
