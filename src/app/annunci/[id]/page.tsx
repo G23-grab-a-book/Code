@@ -2,7 +2,8 @@
 
 import axios from "axios";
 import { use, useEffect, useState } from "react"
-import { Spin } from "antd";
+import { Button, Spin } from "antd";
+import Header from "@/app/header";
 
 
 let id: string = "";
@@ -36,12 +37,16 @@ function ViewAnnuncio({ params, }: { params: { id: string; }; }) {
     }
 
     const [ad, setAd] = useState<Ad | null>(null);
+    const [username, setUsername] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
         const fetchAnnuncio = async () => {
             setIsLoading(true);
             const data = await getAnnuncio(params.id);
             setAd(data);
+            const username = await axios.get("/api/user/", { params: { user: data.seller } });
+            setUsername(username.data.data.username);
+            console.log(username);
             setIsLoading(false);
         };
 
@@ -56,7 +61,7 @@ function ViewAnnuncio({ params, }: { params: { id: string; }; }) {
     }
 
     return (
-        <div className="viewAnnuncio">
+        <><Header /><div>
             {ad && (
                 <div className="annuncioBody">
                     <h2 className="Title">{ad.title}</h2>
@@ -66,10 +71,15 @@ function ViewAnnuncio({ params, }: { params: { id: string; }; }) {
                     <p>price: {ad.price}€</p>
                     <p>isbn: {ad.ISBN}</p>
                     <p>sellerID: {ad.seller}</p>
+                    <p>username: {username}</p>
                     <hr />
                 </div>
             )}
         </div>
+        <div>
+            <Button type="default" shape="round" >"dsa!"</Button>
+        </div>
+        </>
     );
 }
 
