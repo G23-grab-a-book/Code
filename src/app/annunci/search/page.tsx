@@ -33,9 +33,9 @@ export default function Search() {
             value = value.replace(/\+/g, " ");
             // const response = await axios.get('/api/annunci/ricerca', { search: value });
             const response = await axios.get("/api/annunci/ricerca", { params: { search: value } });
-            var annunci: Announcement[] = [];
-            for (var i = 0; i < response.data.data.length; i++) {
-                var annuncio: Announcement = {
+            let annunci: Announcement[] = [];
+            for (let i = 0; i < response.data.data.length; i++) {
+                let annuncio: Announcement = {
                     id: response.data.data[i]._id,
                     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.6VrI1fe7BXBT_dNPg3BBXQHaEo%26pid%3DApi&f=1&ipt=907643bde8975732ef04e26c798b568ac67eb3fa882a55bcae7885182a6f9a95&ipo=images",
                     title: response.data.data[i].title,
@@ -71,7 +71,7 @@ export default function Search() {
                 enterButton="Search"
                 size="large"
                 onSearch={(value) => {
-                    var values = value.replace(/\s+/g, "+");
+                    let values = value.replace(/\s+/g, "+");
                     console.log(values);
                     router.push(`/annunci/search/?search=${values}`);
                     onSearch(value);

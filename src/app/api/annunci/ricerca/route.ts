@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
         const searchUrl = request.nextUrl.searchParams.get("search");
         // const search: string = reqBody.search;
         // check if the string is a number
-        var search:string;
+        let search:string;
         if (searchUrl == null) {
             search = "";
         } else {

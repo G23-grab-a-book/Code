@@ -38,7 +38,7 @@ export default function Home() {
 
   const test = async () => {
     try {
-      var q = await axios.get("/api/user");
+      let q = await axios.get("/api/user");
       message.success("test successfully");
       console.log(q.data.data);
     } catch (error: any) {
