@@ -19,3 +19,13 @@ input {
   height: 40px !important;
   padding: 0 10px !important;
 }
+
+.forms{
+  align-items: center;
+  margin: auto;
+  width: 50%;
+  text-align: center;
+}
+.profile-button{
+  margin: 2.5px;
+}

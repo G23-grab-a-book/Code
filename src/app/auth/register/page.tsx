@@ -26,8 +26,8 @@ function Register () {
 
     return (
         <div>
-            <div className="">
-                <Form className='w-[500px]' layout='vertical' onFinish={onRegister}>
+            <div className="forms">
+                <Form className='w-[500px]-m-auto' layout='vertical' onFinish={onRegister}>
                     <h1 className='text-2x1 font-bold'>Register</h1>
                     <hr />
                     <br />
@@ -43,7 +43,7 @@ function Register () {
                             initialValue={''}>
                         <input type='email' />
                     </Form.Item>
-                    <Form.Item name="password" label="password"
+                    <Form.Item name="password" label="Password"
                             rules={RequiredField('Please insert the password')}
                             initialValue={''}>
                         <input type='password' />

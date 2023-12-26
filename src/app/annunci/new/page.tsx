@@ -33,9 +33,8 @@ function AddAnnuncio () {
     };
 
     return (
-        <div>
-            <div className="">
-                <Form className='w-[500px]' layout='vertical' onFinish={onAddAnnuncio}>
+        <div className="forms">
+                <Form className='w-[500px]-m-auto' layout='vertical' onFinish={onAddAnnuncio}>
                     <h1 className='text-2x1 font-bold'>Add Book</h1>
                     <hr />
                     <br />
@@ -53,7 +52,7 @@ function AddAnnuncio () {
                     <Form.Item name="category" label="Category"
                                rules={RequiredField('Please choose the category')}
                                initialValue={'other'}>
-                        <select>
+                        <Select>
                             <option value="university">University</option>
                             <option value="action">Action</option>
                             <option value="horror">Horror</option>
@@ -63,7 +62,7 @@ function AddAnnuncio () {
                             <option value="science">Science</option>
                             <option value="mystery">Mystery</option>
                             <option value="other">Other</option>
-                        </select>
+                        </Select>
                     </Form.Item>
                     <Form.Item name="ISBN" label="ISBN"
                                rules={RequiredField('Please insert the ISBN')}
@@ -78,12 +77,12 @@ function AddAnnuncio () {
                     <Form.Item name="condition" label="Condition"
                                rules={RequiredField('Please choose the condition')}
                                initialValue={'new'}>
-                        <select>
+                        <Select>
                             <option value="new">New</option>
                             <option value="good">Good</option>
                             <option value="used">Used</option>
                             <option value="damaged">Damaged</option>
-                        </select>
+                        </Select>
                     </Form.Item>
 
                     <Button type='primary' htmlType='submit' block>
@@ -91,7 +90,6 @@ function AddAnnuncio () {
                     </Button>
                 </Form>
                 <Link href={"/"}>Back to home</Link>
-            </div>
         </div>
 
     )

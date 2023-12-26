@@ -1,9 +1,12 @@
 "use client"
 
-import { Button, message, Input } from 'antd'
+import {Button, message, Input, Dropdown} from 'antd'
 import axios from 'axios';
 import router, { useRouter } from 'next/navigation';
 import Header from './header';
+import {UserOutlined} from "@ant-design/icons";
+import React from "react";
+import DropdownButton from "antd/es/dropdown/dropdown-button";
 
 export default function Home() {
   const router = useRouter();
@@ -50,7 +53,6 @@ export default function Home() {
     <><div>
       <div>
         <h1>Home Page</h1>
-        <Button type='primary' onClick={onLogout}>Logout</Button>
       </div>
     </div></>
   )

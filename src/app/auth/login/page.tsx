@@ -30,8 +30,8 @@ function Login() {
     };
     return (
         <div>
-            <div className="">
-                <Form className='w-[500px]' layout='vertical' onFinish={onLogin} >
+            <div className="forms">
+                <Form className='w-[500px]-m-auto' layout='vertical' onFinish={onLogin} >
                     <h1 className='text-2x1 font-bold'>Login</h1>
                     <hr />
                     <br />

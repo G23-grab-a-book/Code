@@ -1,12 +1,15 @@
 'use client'
 import React from 'react';
-import {Input, Button, message, Form} from 'antd';
+import {Input, Button, message, Form, Dropdown} from 'antd';
 import { UserOutlined, WarningFilled } from '@ant-design/icons';
 
 
 import './header.css';// File CSS per lo stile dell'header
 import {useRouter} from "next/navigation";
 import Link from "next/link";
+import DropdownButton from "antd/es/dropdown/dropdown-button";
+import MenuItem from "antd/es/menu/MenuItem";
+import axios from "axios";
 
 const Header = () => {
   const router = useRouter();
@@ -28,6 +31,16 @@ const Header = () => {
           message.error((error as any).response.data.message);
       }
   };
+    const onLogout = async () => {
+        try {
+            const res = await axios.get("/api/auth/logout");
+            message.success(res.data.message);
+            // SetCurrentUser(null);
+            router.push("/auth/login");
+        } catch (error: any) {
+            message.error(error.response.data.message);
+        }
+    };
 
   return (
     <><header className="app-header">
@@ -47,7 +60,8 @@ const Header = () => {
       </div>
       <div className="right-section">
         <div className="profile">
-          <Button type="primary" shape="circle" icon={<UserOutlined/>} onClick={handleProfileClick}></Button>
+          <Button type="primary" shape="circle" icon={<UserOutlined/>} onClick={handleProfileClick} className={"profile-button"}></Button>
+            <Button type='primary' onClick={onLogout} >Logout</Button>
         </div>
       </div>
 
