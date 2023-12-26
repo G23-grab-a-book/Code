@@ -9,6 +9,6 @@ export async function GET(request: NextRequest, {params}: {params:{id:string}}){
         console.log("ad: " + ad);
         return NextResponse.json(ad, {status: 200});
     }catch (error: any) {
-        return NextResponse.json({ message: error.message, status: 500 });
+        return NextResponse.json({ message: error.message}, {status: 500 });
     }
 }

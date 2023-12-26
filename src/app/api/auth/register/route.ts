@@ -29,13 +29,8 @@ export async function POST(request: NextRequest) {
         await newUser.save();
         return NextResponse.json({
             message: "User created successfully",
-            data: newUser,
-            status:201
-        })
+            data: newUser},{status:201});
     } catch (error: any) {
-        return NextResponse.json({
-                message: "Unauthorized: " + error.message,
-                status: 401
-        });
+        return NextResponse.json({message: "Unauthorized: " + error.message},{status: 401});
     }
 }
