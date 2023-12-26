@@ -31,10 +31,10 @@ export async function POST(request: NextRequest) {
         return response;
     } catch (error: any) {
         return NextResponse.json({
-                message: error.message,
+                message: "Unauthorized: " + error.message,
             },
                 {
-                    status: 400
+                    status: 401
                 }
             );
     }

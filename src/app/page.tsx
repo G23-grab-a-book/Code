@@ -57,7 +57,6 @@ export default function Home() {
       <div>
         <h1>Home Page</h1>
         <Button type='primary' onClick={onLogout}>Logout</Button>
-        <button className="bg-blue-500 text-white p-2" onClick={test}>Tailwid Button</button>
       </div>
     </div></>
   )
