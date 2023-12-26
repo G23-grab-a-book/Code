@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import './globals.css'
 
-// import ThemeProvider from './providers/ThemeProvider';
+import ThemeProvider from './providers/ThemeProvider';
+import Header from './header';
 
 export const metadata: Metadata = {
   title: 'Grab a Book',
@@ -14,12 +15,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-      <html lang="en">
-        <body>
-           {/* <ThemeProvider>  */}
-              {children}
-            {/* </ThemeProvider>  */}
-        </body>
-      </html>
+    <html lang="it">
+      <body>
+        <ThemeProvider>
+          {children}
+        </ThemeProvider> 
+      </body>
+    </html>
   )
 }

@@ -9,7 +9,7 @@ export const validateJWT = async (request: NextRequest) => {
             throw new Error("No token provided");
         }
         const decryptedToken: any = jwt.verify(token, process.env.jwt_secret!);
-        return decryptedToken.id; // ritorna l'id associato al token di login (id dell'utente del db)
+        return decryptedToken.id; // ritorna l'[id] associato al token di login ([id] dell'utente del db)
     } catch (error: any) {
         throw new Error(error.message);
     }
