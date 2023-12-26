@@ -3,10 +3,9 @@ import { Button, Form, message, Spin } from "antd";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { RequiredField } from "../helpers/validation";
-import router, { useRouter } from "next/navigation";
 
-function Profile({ params, }: { params: { id: string; }; }) {
-    
+// function Profile({ params, }: { params: { id: string; }; }) {
+function Profile() {
     const [disable, setDisable] = useState(true);
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -17,10 +16,10 @@ function Profile({ params, }: { params: { id: string; }; }) {
     }
 
     useEffect(() => {
-        const router = useRouter();
         async function getInfo() {
             try {
-                const response = await axios.get(`/api/user/?user=${params.id}`);
+                // const response = await axios.get(`/api/user/?user=${params.id}`);
+                const response = await axios.get(`/api/user/?user=1`);
                 setUsername(response.data.data.username);
                 setEmail(response.data.data.email);
                 setLoading(false); // Segnala che il caricamento è completato

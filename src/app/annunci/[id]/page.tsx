@@ -5,7 +5,6 @@ import { use, useEffect, useState } from "react"
 import { Button, Spin } from "antd";
 import Header from "@/app/header";
 
-
 let id: string = "";
 async function getAnnuncio(id: string) {
     try {
