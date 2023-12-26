@@ -15,9 +15,15 @@ function Login() {
     const router = useRouter();
     const onLogin = async (values: userType) => {
         try {
-            await axios.post("/api/auth/login", values);
-            message.success("Login successful");
-            router.push("/");
+            const res = await axios.post("/api/auth/login", values);
+            console.log(res)
+            if(res.data.status == 401){
+                message.error(res.data.message);
+            }
+            else{
+                message.success("Login successful");
+                router.push("/");
+            }
         } catch (error: any) {
             message.error(error.response.data.message);
         }
@@ -44,7 +50,7 @@ function Login() {
                     </Button>
 
                     <Link href="/auth/register" className='text-black'>
-                        Don't you have an account? Register.
+                        You don't have an account? Register.
                     </Link>
                 </Form>
             </div>
