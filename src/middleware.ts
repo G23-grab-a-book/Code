@@ -21,14 +21,14 @@ export async function middleware(request: NextRequest) {
     if (!token && !publicRoute){
         return NextResponse.redirect(new URL("/auth/login", request.url));
     }
-
+/*
     if (token && publicRoute) {
         return NextResponse.redirect(new URL("/", request.url));
-    }
+    }*/
 
     return NextResponse.next();
 }
 
 export const config = {
-    matcher: ["/auth/login", "/auth/register","/","/annunci/new"], //aggiungere le rotte
+    matcher: ["/auth/login", "/auth/register","/","/annunci/new", "/profile"], //aggiungere le rotte
 };

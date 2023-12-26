@@ -47,13 +47,7 @@ export default function Home() {
   };
 
   return (
-    <><Header /><div>
-      <Input.Search
-        placeholder="cerca il tuo libro"
-        allowClear
-        enterButton="Search"
-        size="large"
-        onSearch={onSearch} />
+    <><div>
       <div>
         <h1>Home Page</h1>
         <Button type='primary' onClick={onLogout}>Logout</Button>

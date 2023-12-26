@@ -14,7 +14,7 @@ const Header = () => {
       try {
           router.push("/profile");
       }catch (e){
-          message.error(e as any);
+          message.error("Please log in");
       }
   }
   const onSearch = async (value: string) => {

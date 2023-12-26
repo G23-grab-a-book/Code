@@ -54,7 +54,7 @@ export default function Search() {
 
     useEffect(() => {
         onSearch(search as string);
-    }, []);
+    }, [search]);
     if (isLoading) {
         return (
             <div className="flex justify-center items-center h-screen">
@@ -65,18 +65,6 @@ export default function Search() {
 
     return (
         <div>
-            <Input.Search
-                placeholder={search as string}
-                allowClear
-                enterButton="Search"
-                size="large"
-                onSearch={(value) => {
-                    let values = value.replace(/\s+/g, "+");
-                    console.log(values);
-                    router.push(`/annunci/search/?search=${values}`);
-                    onSearch(value);
-                }}
-            />
             {announcements.length === 0 ? (
                 <p>No search results found.</p>
             ) : (

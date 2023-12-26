@@ -18,6 +18,7 @@ export default function RootLayout({
     <html lang="it">
       <body>
         <ThemeProvider>
+          <Header/>
           {children}
         </ThemeProvider> 
       </body>
