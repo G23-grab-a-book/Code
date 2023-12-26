@@ -59,11 +59,12 @@ export async function GET(request: NextRequest) {
         const user = await User.findById(userId).select("-password");
         return NextResponse.json({
             data: user,
+            status: 200
         });
     } catch (error: any) {
         return NextResponse.json({
-                message: "Unauthorized",//error.message,
-                status: 401,
+            message: "Unauthorized",//error.message,
+            status: 401,
         });
     }
 }
