@@ -16,14 +16,12 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({
             message: "Ad created successfully",
             data: newAd,
-        }, {status: 201})
+            status: 201
+        })
     } catch (error: any) {
         return NextResponse.json({
-                message: error.message,
-            },
-            {
-                status: 400
-            }
-        );
+            message: error.message,
+            status: 400
+        });
     }
 }
