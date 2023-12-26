@@ -5,9 +5,10 @@ export async function middleware(request: NextRequest) {
     console.log("middleware executed: " + request.nextUrl.pathname);
     let publicRoute = false;
     if(request.nextUrl.pathname == "/auth/login" ||
-        request.nextUrl.pathname == "/auth/register" ||
+        request.nextUrl.pathname == "/auth/register" 
         //request.nextUrl.pathname == "/annunci/search" ||
-        request.nextUrl.pathname == "/"){
+        //|| request.nextUrl.pathname == "/"
+        ){
         publicRoute = true;
     }
 

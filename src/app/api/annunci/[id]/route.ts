@@ -6,8 +6,14 @@ connectDB();
 export async function GET(request: NextRequest, {params}: {params:{id:string}}){
     try{
         const ad = await Ad.findOne({_id: params.id});
-        return NextResponse.json(ad);
+        if(!ad) {
+            throw new Error("Announce not found");
+        }
+        return NextResponse.json({
+            data: ad,
+            status: 200
+        });
     }catch (error: any) {
-        return NextResponse.json({ message: error.message }, { status: 500 });
+        return NextResponse.json({ message: error.message, status: 500 });
     }
 }

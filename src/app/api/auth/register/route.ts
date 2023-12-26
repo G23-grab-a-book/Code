@@ -30,14 +30,12 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({
             message: "User created successfully",
             data: newUser,
+            status: 200
         })
     } catch (error: any) {
         return NextResponse.json({
-                message: error.message,
-            },
-                {
-                    status: 400
-                }
-            );
+            message: "Unauthorized: " + error.message,
+            status: 401
+        });
     }
 }

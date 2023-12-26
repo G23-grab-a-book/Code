@@ -1,18 +1,30 @@
 const url = "http://localhost:3000/api/annunci/";
-const fakeID = "not_a_real_id";
+const fakeID = "1"; // non esiste
 const realID = "6585b9e10e672d2016e18d52";
+const mongoose = require('mongoose');
+require("dotenv").config();
 
 //non ritorna coverage??
 
+
 describe("GET /api/annunci/[id]", () =>{
-    test("GET works with real id", async () =>{
-        expect((await fetch(url+realID)).status).toEqual(200);
+
+    test('GET works with real id', async () => {
+        var response = await fetch(url+realID, {
+            method: 'GET'
+        });
+        expect((await response.json()).status).toEqual(200);
     });
 
-    test("GET does not work with fake id", async () =>{
-        expect((await fetch(url+fakeID)).status).toEqual(500);
-    })
+    test('GET does not work with fakeid id', async () => {
+        var response = await fetch(url+fakeID, {
+            method: 'GET'
+        });
+        expect((await response.json()).status).toEqual(500);
+    });
 });
+
+
 
 
 /*
