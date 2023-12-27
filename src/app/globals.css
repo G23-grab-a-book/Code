@@ -29,3 +29,32 @@ input {
 .profile-button{
   margin: 2.5px;
 }
+
+.annuncio{
+  padding-top: 1%;
+  align-items: center;
+  margin: auto;
+  width: 75%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+  'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+  'Noto Color Emoji';
+}
+.annuncio-header{
+  display: flex;
+  justify-content: space-between; /* Distribuisce gli elementi lungo l'asse principale */
+  align-items: center;
+}
+.annuncio-title{
+  font-size: xx-large;
+  padding-bottom: 1.25%;
+}
+.annuncio-body{
+  padding-left: 2.5%;
+  padding-bottom: 1%;
+  padding-top: 1%;
+}
+.text{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+  'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+  'Noto Color Emoji';
+}

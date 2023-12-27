@@ -1,9 +1,12 @@
 'use client'
 
 import axios from "axios";
-import { use, useEffect, useState } from "react"
+import React, { use, useEffect, useState } from "react"
 import { Button, Spin } from "antd";
 import Header from "@/app/header";
+import Popup from "reactjs-popup";
+import 'reactjs-popup/dist/index.css';
+import router, {useRouter} from "next/navigation";
 
 let id: string = "";
 async function getAnnuncio(id: string) {
@@ -35,18 +38,26 @@ function ViewAnnuncio({ params, }: { params: { id: string; }; }) {
         seller: string;
     }
 
+    const router = useRouter();
+
     const [ad, setAd] = useState<Ad | null>(null);
     const [username, setUsername] = useState<string | null>(null);
+    const [email, setEmail] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
         const fetchAnnuncio = async () => {
-            setIsLoading(true);
-            const data = await getAnnuncio(params.id);
-            setAd(data);
-            const username = await axios.get("/api/user/", { params: { user: data.seller } });
-            setUsername(username.data.data.username);
-            console.log(username);
-            setIsLoading(false);
+            try{
+                setIsLoading(true);
+                const data = await getAnnuncio(params.id);
+                setAd(data);
+                const username = await axios.get("/api/user/", { params: { user: data.seller } });
+                setUsername(username.data.data.username);
+                setEmail(username.data.data.email);
+                console.log(username);
+                setIsLoading(false);
+            }catch(e){
+                router.push("/not-found");
+            }
         };
 
         fetchAnnuncio();
@@ -60,23 +71,29 @@ function ViewAnnuncio({ params, }: { params: { id: string; }; }) {
     }
 
     return (
-        <><Header /><div>
+        <><div>
             {ad && (
-                <div className="annuncioBody">
-                    <h2 className="Title">{ad.title}</h2>
-                    <p>author: {ad.author}</p>
-                    <p>category: {ad.category}</p>
-                    <p>condition: {ad.condition}</p>
-                    <p>price: {ad.price}€</p>
-                    <p>isbn: {ad.ISBN}</p>
-                    <p>sellerID: {ad.seller}</p>
-                    <p>username: {username}</p>
-                    <hr />
+                <div className="annuncio">
+                    <div className="annuncio-header">
+                        <h2 className="annuncio-title">{ad.title}</h2>
+                        <Popup trigger={<Button type={"primary"}>Contatta</Button>}>
+                            <div>
+                                <p className="text">Email di {username}: {email}</p>
+                            </div>
+                        </Popup>
+                    </div>
+                    <hr/>
+                    <div className="annuncio-body">
+                        <p>Autore: {ad.author}</p>
+                        <p>Categoria: {ad.category}</p>
+                        <p>Condizione: {ad.condition}</p>
+                        <p>Prezzo: {ad.price}€</p>
+                        <p>ISBN: {ad.ISBN}</p>
+                        <p>Venditore: {username}</p>
+                    </div>
+                    <hr/>
                 </div>
             )}
-        </div>
-        <div>
-            <Button type="default" shape="round" >"dsa!"</Button>
         </div>
         </>
     );

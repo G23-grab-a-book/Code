@@ -66,9 +66,9 @@ export default function Search() {
     return (
         <div>
             {announcements.length === 0 ? (
-                <p>No search results found.</p>
+                <p className="text">No search results found.</p>
             ) : (
-                <ul>
+                <ul className="text">
                     {announcements.map((announcement) => (
                         <a href={`/annunci/${announcement.id}`} key={announcement.id}>
                             <li key={announcement.id} style={{ display: 'flex', marginBottom: '1em' }}>
