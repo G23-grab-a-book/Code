@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 require("dotenv").config();
 
-describe("POST /api/auth/logout", () => {
+describe("GET /api/auth/logout", () => {
 
     beforeAll( async () => {
         jest.setTimeout(8000);
@@ -13,7 +13,7 @@ describe("POST /api/auth/logout", () => {
         mongoose.connection.close(true);
     });
     
-    test('POST /api/auth/logout with Logged Account', async () => {
+    test('GET /api/auth/logout with Logged Account', async () => {
         
         var token = jwt.sign({email: 'John@mail.com'}, process.env.jwt_secret, {expiresIn: 86400});
 
@@ -26,7 +26,7 @@ describe("POST /api/auth/logout", () => {
         expect((await response.json()).message).toEqual('Logout successful');
     });
 
-    test('POST /api/auth/logout with not Logged Account', async () => {
+    test('GET /api/auth/logout with not Logged Account', async () => {
 
         var response = await fetch(url, {
             method: 'GET',

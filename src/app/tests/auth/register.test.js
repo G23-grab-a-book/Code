@@ -16,39 +16,27 @@ describe("POST /api/auth/register", () => {
 
         var response = await fetch(url, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Basic YWxlOmFsZQ==',
-            },
+            body: JSON.stringify({email: 'paolazzialessio@gmail.com', username: 'ale', password: 'ale'})
         });
-        console.log((await response.json()).message);
-        //expect((await response.json()).message).toEqual('Logout successful');
+        expect((await response.json()).message).toEqual('Unauthorized: Email already exists');
     });
 
     test('POST /api/auth/register with Username already Existing', async () => {
         
-        var token = jwt.sign({email: 'John@mail.com'}, process.env.jwt_secret, {expiresIn: 86400});
-
         var response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                cookie: `token=${token}`
-            }
+            method: 'POST',
+            body: JSON.stringify({email: 'blabla1@gmail.com', username: 'ale', password: 'ale'})
         });
-        //expect((await response.json()).message).toEqual('Logout successful');
+        expect((await response.json()).message).toEqual('Unauthorized: Username already exists');
     });
 
     test('POST /api/auth/register Successful', async () => {
         
-        var token = jwt.sign({email: 'John@mail.com'}, process.env.jwt_secret, {expiresIn: 86400});
-
         var response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                cookie: `token=${token}`
-            }
+            method: 'POST',
+            body: JSON.stringify({email: 'blabla2@gmail.com', username: 'bla2', password: 'bla'})
         });
-        //expect((await response.json()).message).toEqual('Logout successful');
+        expect((await response.json()).message).toEqual('User created successfully');
     });
 
 });
