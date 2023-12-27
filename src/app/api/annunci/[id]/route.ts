@@ -9,9 +9,9 @@ export async function GET(request: NextRequest, {params}: {params:{id:string}}){
         if(!ad) {
             throw new Error("Announce not found");
         }
-        return NextResponse.json({data: ad},{status: 200}
+        return NextResponse.json({data: ad, status: 200}
         );
     }catch (error: any) {
-        return NextResponse.json({ message: "Unauthorized" + error.message},{status: 400});
+        return NextResponse.json({ message: "Unauthorized" + error.message, status: 400});
     }
 }

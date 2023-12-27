@@ -41,9 +41,9 @@ export async function PATCH(request: NextRequest) {
         }
         
         await user.save();
-        return NextResponse.json({message: "Account aggiornato correttamente!"},{status: 200});
+        return NextResponse.json({message: "Account aggiornato correttamente!", status: 200});
     } catch (error: any) {
-        return NextResponse.json({message: error.message},{status: 400});
+        return NextResponse.json({message: error.message, status: 400});
     }
 }
 export async function GET(request: NextRequest) {
@@ -51,10 +51,9 @@ export async function GET(request: NextRequest) {
         const userId = await validateJWT(request);
         // retrieve the user without the password
         const user = await User.findById(userId).select("-password");
-        return NextResponse.json({data: user},{status: 200});
+        return NextResponse.json({data: user, status: 200});
     } catch (error: any) {
         return NextResponse.json({
-            message: "Unauthorized"},//error.message,
-            {status: 401});
+            message: "Unauthorized",status: 401});
     }
 }

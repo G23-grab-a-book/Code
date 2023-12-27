@@ -22,6 +22,7 @@ function AddAnnuncio () {
         try {
             const res = await axios.post("/api/annunci/new", values);
             message.success("Successfully added post");
+            console.log(res);
             const id = res.data.data._id;
             console.log(res.data.data._id);
             router.push("/annunci/"+id);

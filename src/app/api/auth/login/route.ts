@@ -23,13 +23,13 @@ export async function POST(request: NextRequest) {
         // create token
         const token = jwt.sign({ id: user._id }, process.env.jwt_secret!, { expiresIn: "7d" });
         
-        const response = NextResponse.json({ message: "Login successfull"},{status: 200})
+        const response = NextResponse.json({ message: "Login successfull", status: 200})
         response.cookies.set("token", token, {
             httpOnly: true,
             path: "/",
         });
         return response;
     } catch (error: any) {
-        return NextResponse.json({message: "Unauthorized: " + error.message},{status: 401});
+        return NextResponse.json({message: "Unauthorized: " + error.message, status: 401});
     }
 }
