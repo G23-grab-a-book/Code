@@ -49,11 +49,10 @@ function ViewAnnuncio({ params, }: { params: { id: string; }; }) {
             try{
                 setIsLoading(true);
                 const data = await getAnnuncio(params.id);
-                setAd(data);
-                const username = await axios.get("/api/user/", { params: { user: data.seller } });
+                setAd(data.ad);
+                const username = await axios.get("/api/user/", { params: { user: data.ad.seller } });
                 setUsername(username.data.data.username);
                 setEmail(username.data.data.email);
-                console.log(username);
                 setIsLoading(false);
             }catch(e){
                 router.push("/not-found");
