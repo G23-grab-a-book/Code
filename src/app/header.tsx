@@ -10,6 +10,8 @@ import Link from "next/link";
 import DropdownButton from "antd/es/dropdown/dropdown-button";
 import MenuItem from "antd/es/menu/MenuItem";
 import axios from "axios";
+import logo from "../../public/Logo.png";
+import Image from "next/image";
 
 const Header = () => {
 
@@ -49,7 +51,11 @@ const Header = () => {
     <><header className="app-header">
       <div className="left-section">
         <div className="title">
-            <a href={"/"} className="text"><h1 className="grab-a-book">Grab a Book</h1></a>
+            <a href={"/"} className="grab-a-book">
+              <h1 className="text">
+                <Image src={logo} alt="logo" width={30} height={30} className="logo"/>
+                Grab a Book</h1>
+            </a>
         </div>
       </div>
       <div className="center-section">
