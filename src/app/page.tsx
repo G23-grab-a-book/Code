@@ -104,7 +104,7 @@ export default function Home() {
                 <p style={{ color: 'grey' }}> di {announcement.author}</p>
               </div>
               <div style={{ textAlign: 'right', marginLeft: '4em' }}>
-                <p>Prezzo: {announcement.price.toLocaleString()} €</p>
+                <p>Prezzo: {announcement.price.toLocaleString(undefined, {minimumFractionDigits: 2})} €</p>
                 <br />
                 <Button shape='round' type='primary' href={`/annunci/${announcement.id}`}>Apri Annuncio</Button>
               </div>

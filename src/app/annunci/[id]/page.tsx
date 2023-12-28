@@ -95,7 +95,7 @@ function ViewAnnuncio({ params, }: { params: { id: string; }; }) {
             <p style={{ fontSize: '16px', color: '#888' }}>di <Link style={{ fontSize: '16px', color: '#666' }} href={`/annunci/search?search=autore:"${ad.author.replace(' ','+')}"`}>{ad.author}</Link></p>
             <p>Categoria: <Link style={{color:'black'}} href={`/annunci/search?search=categoria:"${ad.category.replace(' ','+')}"`}>{ad.category}</Link></p>
             <p>Condizione: {ad.condition}</p>
-            <p style={{ fontSize: '24px' }}>Compra ora a {ad.price.toLocaleString()} €</p>
+            <p style={{ fontSize: '24px' }}>Compra ora a {ad.price.toLocaleString(undefined, {minimumFractionDigits: 2})} €</p>
           </div>
         </div>
       )}
