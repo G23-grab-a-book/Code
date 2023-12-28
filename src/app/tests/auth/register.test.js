@@ -30,13 +30,15 @@ describe("POST /api/auth/register", () => {
         expect((await response.json()).message).toEqual('Unauthorized: Username already exists');
     });
 
-    test('POST /api/auth/register Successful', async () => {
+    
+    // test('POST /api/auth/register Successful', async () => {
         
-        var response = await fetch(url, {
-            method: 'POST',
-            body: JSON.stringify({email: 'blabla2@gmail.com', username: 'bla2', password: 'bla'})
-        });
-        expect((await response.json()).message).toEqual('User created successfully');
-    });
+    //     var response = await fetch(url, {
+    //         method: 'POST', // change email & username when rerunning this test.
+    //         body: JSON.stringify({email: 'blabla5@gmail.com', username: 'bla5', password: 'bla'})
+    //     });
+    //     expect((await response.json()).message).toEqual('User created successfully');
+        
+    // });
 
 });

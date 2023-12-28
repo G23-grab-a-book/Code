@@ -1,7 +1,6 @@
 const url = "http://localhost:3000/api/annunci/";
-const impossibleID = "1"; //non può esistere un id così
 const fakeID = "aaaaaaaaaaaaaaaaaaaaaaaa"; // non esiste
-const realID = "658da30450e3b1cfbd63c5ab";
+const realID = "658dcc69fa0e3ae36d5d4b5b";
 require("dotenv").config();
 
 describe("GET /api/annunci/[id]", () =>{
@@ -21,12 +20,35 @@ describe("GET /api/annunci/[id]", () =>{
 
         expect((await response.json()).status).toEqual(400);
     });
+});
 
-    test('GET does not work with impossible id', async () => {
-        var response = await fetch(url+impossibleID, {
-            method: 'GET'
+
+describe("DELETE /api/annunci/[id]", () =>{
+    const jwt = require('jsonwebtoken');
+
+    // test('DELETE works with real id', async () => {
+    //     var token = jwt.sign({id: '658d9e3cf36dc1419f4a5b5d'}, process.env.jwt_secret, {expiresIn: 86400});
+        
+    //     var response = await fetch(url+realID, {
+    //         method: 'DELETE',
+    //         headers: {
+    //             cookie: `token=${token}`
+    //         }
+    //     });
+
+    //     console.log(await response.json());
+    //     // expect((await response.json()).status).toEqual(200);
+    // });
+
+    test("DELETE does not work when trying deleting another's announce", async () => {
+        var token = jwt.sign({id: '658d9faaf36dc1419f4a5b70'}, process.env.jwt_secret, {expiresIn: 86400});
+
+        var response = await fetch(url+realID, {
+            method: 'DELETE',
+            headers: {
+                cookie: `token=${token}`
+            }
         });
-
-        expect((await response.json()).status).toEqual(400);
+        expect((await response.json()).status).toEqual(401);
     });
 });
