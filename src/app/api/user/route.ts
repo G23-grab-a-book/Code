@@ -59,8 +59,11 @@ export async function PATCH(request: NextRequest) {
 export async function GET(request: NextRequest) {
     try {
         // const userId = await validateJWT(request);
-        const userId = request.nextUrl.searchParams.get("user");
-        // console.log(userId);
+        var userId = request.nextUrl.searchParams.get("user");
+        console.log(userId);
+        if (!userId) {
+            userId = await validateJWT(request);
+        }
         // retrieve the user without the password
         const user = await User.findById(userId).select("-password");
         return NextResponse.json({

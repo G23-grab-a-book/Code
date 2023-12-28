@@ -13,13 +13,17 @@ interface userType {
 }
 function Register () {
     const router = useRouter();
+    const [loading, setLoading] = useState(false); 
     const onRegister = async (values: userType) => {
         console.log(values);
         try {
+            setLoading(true);
             await axios.post("/api/auth/register", values);
-            message.success("Registration successful, please login to continue");
+            message.success("Registrazione avvenuta con successo, benvenuto!");
+            setLoading(false);
             router.push("/auth/login");
         } catch (error: any) {
+            setLoading(false);
             message.error(error.response.data.message);
         }
     };
@@ -28,7 +32,7 @@ function Register () {
         <div>
             <div className="forms">
                 <Form className='w-[500px]-m-auto' layout='vertical' onFinish={onRegister}>
-                    <h1 className='text-2x1 font-bold'>Register</h1>
+                    <h1 className='text-2x1 font-bold'>Registrati</h1>
                     <hr />
                     <br />
                     
@@ -48,14 +52,15 @@ function Register () {
                             initialValue={''}>
                         <input type='password' />
                     </Form.Item>
-                    <Button type='primary' htmlType='submit' block>
+                    <Button type='primary' htmlType='submit' block loading={loading}>
                         Register
                     </Button>
 
-                    <Link href="/auth/login" className='text-black'>
-                        Already have an account? Login.
-                    </Link>
                 </Form>
+                <br />
+                <Link href="/auth/login" className='text-black'>
+                        Hai già un account? Accedi.
+                    </Link>
             </div>
         </div>
         

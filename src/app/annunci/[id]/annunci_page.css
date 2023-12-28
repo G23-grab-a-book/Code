@@ -1,0 +1,21 @@
+.ad-details-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5cm;
+}
+
+.ad-info {
+  width: 80%;
+  background-color: #f9f9f9;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.ad-info h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.ad-info p {
+  margin-bottom: 5px;
+}

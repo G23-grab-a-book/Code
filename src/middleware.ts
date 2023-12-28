@@ -19,7 +19,10 @@ export async function middleware(request: NextRequest) {
     // token presente e rotta non pubblica => easy
     
     if (!token && !publicRoute){
-        return NextResponse.redirect(new URL("/auth/login", request.url));
+        // return NextResponse.redirect(new URL("/auth/login", request.url));
+        const loginUrl = new URL("/auth/login", request.url);
+        loginUrl.searchParams.append('redirect', request.url);
+        return NextResponse.redirect(loginUrl);
     }
 /*
     if (token && publicRoute) {

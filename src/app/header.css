@@ -1,41 +1,66 @@
 .app-header {
-    display: flex;
-    justify-content: space-between; /* Distribuisce gli elementi lungo l'asse principale */
-    align-items: center;
-    background-color: #f44336; /* Rosso/ruggine */
-    padding: 16px; /* Padding intorno all'header */
-    color: white; /* Colore del testo */
-  }
-  .left-section, .right-section {
-    flex: 0 0 auto; /* This will prevent the left and right sections from growing */
+  display: flex;
+  justify-content: space-between;
+  /* Distribuisce gli elementi lungo l'asse principale */
+  align-items: center;
+  background-color: #f44336;
+  /* Rosso/ruggine */
+  padding: 16px;
+  /* Padding intorno all'header */
+  color: white;
+  /* Colore del testo */
 }
+
+.left-section,
+.right-section {
+  flex: 0 0 auto;
+  /* This will prevent the left and right sections from growing */
+}
+
 .title {
-    flex: 0 0 auto;
-    background-color: #8b0000; /* Sfondo rosso/ruggine */
-    padding: 8px 16px; /* Padding intorno al titolo */
-  }
-  
+  flex: 0 0 auto;
+  background-color: #8b0000;
+  /* Sfondo rosso/ruggine */
+  padding: 8px 16px;
+  /* Padding intorno al titolo */
+  border-radius: 20px;
+}
+
+.title a {
+  text-decoration: none;
+  /* This will remove the underline */
+  color: inherit;
+  /* This will make the link color the same as the parent element */
+}
+
+.title a:visited {
+  color: inherit;
+  /* This will prevent the link color from changing when clicked */
+}
 
 .center-section {
-    /* Margine attorno alla barra di ricerca */
-    margin: 0 16px;
-    flex: 1 1 auto; /* This will allow the center section to grow and occupy the remaining space */
+  /* Margine attorno alla barra di ricerca */
+  margin: 0 16px;
+  flex: 1 1 auto;
+  /* This will allow the center section to grow and occupy the remaining space */
 }
-  
-  .search-input {
-    flex: 1 1 auto; /* Occupa lo spazio disponibile */
-    /* flex-grow: 1; Occupa lo spazio disponibile */
-    /* width: 100%; Occupa lo spazio disponibile */
-    border-radius: 20px; /* Bordi arrotondati */
-  }
-  
-  .right-section {
-    display: flex;
-    align-items: center;
-  }
-  
-  .profile {
-    flex: 0 0 auto;
-    margin-left: auto; /* Spinge l'icona del profilo completamente a destra */
-  }
-  
+
+.search-input {
+  flex: 1 1 auto;
+  /* Occupa lo spazio disponibile */
+  /* flex-grow: 1; Occupa lo spazio disponibile */
+  /* width: 100%; Occupa lo spazio disponibile */
+  border-radius: 20px;
+  /* Bordi arrotondati */
+}
+
+.right-section {
+  display: flex;
+  align-items: center;
+}
+
+.profile {
+  flex: 0 0 auto;
+  margin-left: auto;
+  /* Spinge l'icona del profilo completamente a destra */
+}

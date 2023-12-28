@@ -3,8 +3,8 @@ import { RequiredField } from "@/app/helpers/validation";
 import { Button, Form, message } from "antd"
 import axios from "axios";
 import Link from "next/link"
-import React from "react";
-import Router, { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import Router, { useRouter, useSearchParams } from "next/navigation";
 
 
 interface userType {
@@ -13,18 +13,30 @@ interface userType {
 }
 function Login() {
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const [loading, setLoading] = useState(false); 
     const onLogin = async (values: userType) => {
         try {
+            setLoading(true);
             const res = await axios.post("/api/auth/login", values);
             console.log(res)
             if(res.data.status == 401){
+                setLoading(false);
                 message.error(res.data.message);
             }
             else{
-                message.success("Login successful");
+                setLoading(false);
+                message.success("Benvenuto!");
+                // After successful login
+                const search = searchParams.get('redirect');
+                if (search !== null) {
+                    router.push(search);
+                    return;
+                }
                 router.push("/");
             }
         } catch (error: any) {
+            setLoading(false);
             message.error(error.response.data.message);
         }
     };
@@ -32,7 +44,7 @@ function Login() {
         <div>
             <div className="forms">
                 <Form className='w-[500px]-m-auto' layout='vertical' onFinish={onLogin} >
-                    <h1 className='text-2x1 font-bold'>Login</h1>
+                    <h1 className='text-2x1 font-bold'>Accedi</h1>
                     <hr />
                     <br />
                     <Form.Item name="username" label="Username"
@@ -45,14 +57,16 @@ function Login() {
                         initialValue={''}>
                         <input type='password' />
                     </Form.Item>
-                    <Button type='primary' htmlType='submit' block>
+                    <Button type='primary' htmlType='submit' block loading={loading}>
                         Login
                     </Button>
 
-                    <Link href="/auth/register" className='text-black'>
-                        You don't have an account? Register.
-                    </Link>
+
                 </Form>
+                <br />
+                <Link href="/auth/register" className='text-black'>
+                        Non hai anora un account? Registrati.
+                    </Link>
             </div>
         </div>
         )
