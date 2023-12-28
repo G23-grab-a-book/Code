@@ -80,7 +80,7 @@ function Profile() {
 
     const adDelete = async (values: Announcement) => {
         try {
-            await axios.delete(`/api/annunci/${values.id}`, { params: { user: values.seller } });
+            await axios.delete(`/api/annunci/${values.id}`);
             message.success("Annuncio eliminato con successo!");
             getInfo();
 

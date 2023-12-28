@@ -16,9 +16,10 @@ export async function GET(request: NextRequest, {params}: {params:{id:string}}){
 
 export async function DELETE(request: NextRequest, {params}: {params:{id:string}}){
     try{
-        const user = request.nextUrl.searchParams.get("user");
         const userId = await validateJWT(request);
-        if (userId !== user) {
+        const ad = await Ad.findOne({_id: params.id});
+        if (ad.seller != userId) {
+            console.log("ad.seller: " + ad.seller);
             return NextResponse.json({message:'Non puoi eliminare questo annuncio!', status: 401});
         } else {
             await Ad.findOneAndDelete({_id: params.id});
