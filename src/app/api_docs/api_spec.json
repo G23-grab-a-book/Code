@@ -1,0 +1,506 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "version": "1.0.0",
+    "title": "Grab a Book",
+    "description": "API della web-app Grab a Book realizzate per il progetto di ingegneria del software dell'anno 2023/24 dal gruppo G23.\nAlcune API funzionano solo se si è loggati:\n- Modifica un utente (PATCH /api/user)\n- Crea un nuovo annuncio (POST /api/annunci/new)\n- Elimina un annuncio (DELETE /api/annunci/{id})\n- Ottenere le informazini su se stessi (GET /api/user)\n\nÈ possibile quindi inserire il valore del token presente nei cookie quando si effettua il login per utilizzare queste API"
+  },
+  "tags": [
+    {
+      "name": "Autenticazione",
+      "description": "API per la gestione della registrazione e dell'accesso"
+    },
+    {
+      "name": "Utenti",
+      "description": "API relative alla gestione degli uteni"
+    },
+    {
+      "name": "Annunci",
+      "description": "API relative alla gestione degli annunci"
+    }
+  ],
+  "paths": {
+    "/api/auth/register": {
+      "post": {
+        "tags": [
+          "Autenticazione"
+        ],
+        "summary": "Registra un nuovo utente",
+        "requestBody": {
+          "required": true,
+          "description": "Dati nuovo utente",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "$ref": "#/definitions/dati_utente/properties/email"
+                  },
+                  "username": {
+                    "$ref": "#/definitions/dati_utente/properties/username"
+                  },
+                  "password": {
+                    "$ref": "#/definitions/dati_utente/properties/password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "L'utente è stato creato e aggiunto al database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "$ref": "#/definitions/dati_utente/properties/email"
+                    },
+                    "username": {
+                      "$ref": "#/definitions/dati_utente/properties/username"
+                    },
+                    "password": {
+                      "$ref": "#/definitions/dati_utente/properties/password"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "La email e/o l'username sono già presenti e quindi non è possibile registrare il nuovo utente."
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "tags": [
+          "Autenticazione"
+        ],
+        "summary": "Permette ad un'utente di accedere",
+        "requestBody": {
+          "required": true,
+          "description": "Dati utente",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "$ref": "#/definitions/dati_utente/properties/username"
+                  },
+                  "password": {
+                    "$ref": "#/definitions/dati_utente/properties/password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Accesso eseguito con successo"
+          },
+          "401": {
+            "description": "I dati inseriti non corrispondono a nessun utente nel database e quindi non è possibile accedere"
+          }
+        }
+      }
+    },
+    "/api/auth/logout": {
+      "get": {
+        "tags": [
+          "Autenticazione"
+        ],
+        "summary": "Permette di fare il logout",
+        "responses": {
+          "200": {
+            "description": "Logout eseguito con successo"
+          }
+        }
+      }
+    },
+    "/api/user": {
+      "get": {
+        "tags": [
+          "Utenti"
+        ],
+        "summary": "Usa il token dell'utente o quello passato come parametro per ottenre la sua email e il suo",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "query",
+            "description": "passare l'userId; se non viene passato nulla l'id viene ricavato dal token creato dall'autenticazione",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "658c8eea435925670d23dcf1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Utente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "$ref": "#/definitions/dati_utente/properties/email"
+                    },
+                    "username": {
+                      "$ref": "#/definitions/dati_utente/properties/username"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Richiesta non valida"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Utenti"
+        ],
+        "summary": "Permette di modifcare il profilo di un'utente in uno o tutti i suoi campi",
+        "requestBody": {
+          "required": true,
+          "description": "Dati utente",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "$ref": "#/definitions/dati_utente/properties/email"
+                  },
+                  "username": {
+                    "$ref": "#/definitions/dati_utente/properties/username"
+                  },
+                  "password": {
+                    "$ref": "#/definitions/dati_utente/properties/password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Account aggiornato correttament"
+          },
+          "400": {
+            "description": "I dati inseriti corrispondono a un utente nel database e quindi non è possibile modificare il profilo con quei dati"
+          }
+        }
+      }
+    },
+    "/api/annunci/new": {
+      "post": {
+        "tags": [
+          "Annunci"
+        ],
+        "summary": "Crea un nuovo annuncio",
+        "requestBody": {
+          "required": true,
+          "description": "Annuncio",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "titolo": {
+                    "$ref": "#/definitions/annuncio/properties/titolo"
+                  },
+                  "autore": {
+                    "$ref": "#/definitions/annuncio/properties/autore"
+                  },
+                  "categoria": {
+                    "$ref": "#/definitions/annuncio/properties/categoria"
+                  },
+                  "ISBN": {
+                    "$ref": "#/definitions/annuncio/properties/ISBN"
+                  },
+                  "prezzo": {
+                    "$ref": "#/definitions/annuncio/properties/prezzo"
+                  },
+                  "condizione": {
+                    "$ref": "#/definitions/annuncio/properties/condizione"
+                  },
+                  "venditore": {
+                    "$ref": "#/definitions/annuncio/properties/venditore"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Annuncio creato con successo",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "titolo": {
+                      "$ref": "#/definitions/annuncio/properties/titolo"
+                    },
+                    "autore": {
+                      "$ref": "#/definitions/annuncio/properties/autore"
+                    },
+                    "categoria": {
+                      "$ref": "#/definitions/annuncio/properties/categoria"
+                    },
+                    "ISBN": {
+                      "$ref": "#/definitions/annuncio/properties/ISBN"
+                    },
+                    "prezzo": {
+                      "$ref": "#/definitions/annuncio/properties/prezzo"
+                    },
+                    "condizione": {
+                      "$ref": "#/definitions/annuncio/properties/condizione"
+                    },
+                    "venditore": {
+                      "$ref": "#/definitions/annuncio/properties/venditore"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Errore nell'inserimento nell'aggiunta dell'annuncio al database"
+          }
+        }
+      }
+    },
+    "/api/annunci/ricerca": {
+      "get": {
+        "tags": [
+          "Annunci"
+        ],
+        "summary": "Cerca tra gli annunci",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "usa il dato filtro di ricerca, se si passa 'last' si ottengono gli ultimi 3 annunci pubblicati, se si passa user si ottengono gli annunci pubblicati da quell'utente",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "Le cronache di Narnia"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista annunci",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "titolo": {
+                        "$ref": "#/definitions/annuncio/properties/titolo"
+                      },
+                      "autore": {
+                        "$ref": "#/definitions/annuncio/properties/autore"
+                      },
+                      "categoria": {
+                        "$ref": "#/definitions/annuncio/properties/categoria"
+                      },
+                      "ISBN": {
+                        "$ref": "#/definitions/annuncio/properties/ISBN"
+                      },
+                      "prezzo": {
+                        "$ref": "#/definitions/annuncio/properties/prezzo"
+                      },
+                      "condizione": {
+                        "$ref": "#/definitions/annuncio/properties/condizione"
+                      },
+                      "venditore": {
+                        "$ref": "#/definitions/annuncio/properties/venditore"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "La richiesta non è valida"
+          }
+        }
+      }
+    },
+    "/api/annunci/{id}": {
+      "get": {
+        "tags": [
+          "Annunci"
+        ],
+        "summary": "Ottieni tutte le informazioni su un annuncio",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "è l'id di un annuncio",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "658d9f02f36dc1419f4a5b68"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Annuncio",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "titolo": {
+                      "$ref": "#/definitions/annuncio/properties/titolo"
+                    },
+                    "autore": {
+                      "$ref": "#/definitions/annuncio/properties/autore"
+                    },
+                    "categoria": {
+                      "$ref": "#/definitions/annuncio/properties/categoria"
+                    },
+                    "ISBN": {
+                      "$ref": "#/definitions/annuncio/properties/ISBN"
+                    },
+                    "prezzo": {
+                      "$ref": "#/definitions/annuncio/properties/prezzo"
+                    },
+                    "condizione": {
+                      "$ref": "#/definitions/annuncio/properties/condizione"
+                    },
+                    "venditore": {
+                      "$ref": "#/definitions/annuncio/properties/venditore"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "La richiesta non è valida"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Annunci"
+        ],
+        "summary": "Elimina un annuncio",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "è l'id di un annuncio",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "658d9f02f36dc1419f4a5b68"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Annuncio eliminato con successo"
+          },
+          "401": {
+            "description": "L'annuncio che si tenta di eliminare non è stato pubblicato dall'utente attualmente collegato"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "cookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "token"
+      }
+    }
+  },
+  "security": [
+    {
+      "cookieAuth": []
+    }
+  ],
+  "definitions": {
+    "dati_utente": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "658c8eea435925670d23dcf1"
+        },
+        "email": {
+          "type": "string",
+          "example": "nuova.email@mail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "NuovaPassword"
+        },
+        "username": {
+          "type": "string",
+          "example": "username"
+        }
+      }
+    },
+    "annuncio": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "658d9f02f36dc1419f4a5b68"
+        },
+        "titolo": {
+          "type": "string",
+          "example": "Le cronache di Narnia"
+        },
+        "autore": {
+          "type": "string",
+          "example": "C. S. Lewis"
+        },
+        "categoria": {
+          "type": "string",
+          "example": "Fantasy"
+        },
+        "ISBN": {
+          "type": "string",
+          "example": "8022264753845"
+        },
+        "prezzo": {
+          "type": "float",
+          "example": 15.6
+        },
+        "condizione": {
+          "type": "string",
+          "example": "buono"
+        },
+        "venditore": {
+          "type": "string",
+          "example": "658d9e3cf36dc1419f4a5b5d"
+        }
+      }
+    }
+  }
+}
