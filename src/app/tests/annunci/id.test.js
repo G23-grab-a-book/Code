@@ -1,7 +1,7 @@
 const url = "http://localhost:3000/api/annunci/";
 const impossibleID = "1"; //non può esistere un id così
 const fakeID = "aaaaaaaaaaaaaaaaaaaaaaaa"; // non esiste
-const realID = "6585b9e10e672d2016e18d52";
+const realID = "658da30450e3b1cfbd63c5ab";
 require("dotenv").config();
 
 describe("GET /api/annunci/[id]", () =>{
