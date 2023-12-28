@@ -1,3 +1,4 @@
+import { validateJWT } from "@/app/helpers/validatejwt";
 import { connectDB } from "../../../../../dbConfig";
 import Annunce from "@/app/models/announceModel";
 import { INTERNALS } from "next/dist/server/web/spec-extension/request";
@@ -59,9 +60,19 @@ export async function GET(request: NextRequest) {
                     }
                 }
             } else {
-                if (search === "last") {
+                if (search === "last") { // this is a search for the last 3 annunces used only on the home page
                     console.log(AnnunceList = await Annunce.find());
                     AnnunceList = await Annunce.find().sort({ _id: -1 }).limit(3);
+                    return NextResponse.json({
+                        message: "Search completed successfully",
+                        data: AnnunceList},
+                        {status: 200}
+                        )
+                } else if (search === "user") { // this is a search by userId used only for the profile page so dosn't need to be filtered more
+                    const userId = await validateJWT(request);
+                    console.log(userId);
+                    AnnunceList = await Annunce.find({ seller: userId });
+                    console.log(AnnunceList);
                     return NextResponse.json({
                         message: "Search completed successfully",
                         data: AnnunceList},
