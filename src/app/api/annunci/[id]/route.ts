@@ -7,8 +7,8 @@ export async function GET(request: NextRequest, {params}: {params:{id:string}}){
     try{
         const ad = await Ad.findOne({_id: params.id});
         console.log("ad: " + ad);
-        return NextResponse.json(ad, {status: 200});
+        return NextResponse.json({ad, status: 200});
     }catch (error: any) {
-        return NextResponse.json({ message: error.message}, {status: 500 });
+        return NextResponse.json({ message: error.message, status: 500 });
     }
 }

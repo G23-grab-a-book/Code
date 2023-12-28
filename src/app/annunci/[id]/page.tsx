@@ -1,8 +1,12 @@
 'use client'
 
 import axios from "axios";
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Button, Spin } from "antd";
+import Header from "@/app/header";
+import Popup from "reactjs-popup";
+import 'reactjs-popup/dist/index.css';
+import router, {useRouter} from "next/navigation";
 import "./annunci_page.css"
 
 let id: string = "";
@@ -25,29 +29,36 @@ function queryClient(id: string, query: () => Promise<any>) {
 }
 
 function ViewAnnuncio({ params, }: { params: { id: string; }; }) {
-  interface Ad {
-    title: string;
-    author: string;
-    category: string;
-    condition: string;
-    price: number;
-    ISBN: string;
-    seller: string;
-  }
+    interface Ad {
+        title: string;
+        author: string;
+        category: string;
+        condition: string;
+        price: number;
+        ISBN: string;
+        seller: string;
+    }
 
-  const [ad, setAd] = useState<Ad | null>(null);
-  const [username, setUsername] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    const fetchAnnuncio = async () => {
-      setIsLoading(true);
-      const data = await getAnnuncio(params.id);
-      setAd(data);
-      const username = await axios.get("/api/user/", { params: { user: data.seller } });
-      setUsername(username.data.data.username);
-      console.log(username);
-      setIsLoading(false);
-    };
+    const router = useRouter();
+
+    const [ad, setAd] = useState<Ad | null>(null);
+    const [username, setUsername] = useState<string | null>(null);
+    const [email, setEmail] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
+    useEffect(() => {
+        const fetchAnnuncio = async () => {
+            try{
+                setIsLoading(true);
+                const data = await getAnnuncio(params.id);
+                setAd(data.ad);
+                const username = await axios.get("/api/user/", { params: { user: data.ad.seller } });
+                setUsername(username.data.data.username);
+                setEmail(username.data.data.email);
+                setIsLoading(false);
+            }catch(e){
+                router.push("/not-found");
+            }
+        };
 
     fetchAnnuncio();
   }, [params.id]);

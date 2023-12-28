@@ -1,6 +1,6 @@
 'use client'
 import { RequiredField } from "@/app/helpers/validation";
-import {Button, Form, message, Select} from "antd"
+import {Button, Form, Input, message, Select} from "antd"
 import axios from "axios";
 import Link from "next/link"
 import { useRouter } from 'next/navigation';
@@ -46,46 +46,46 @@ function AddAnnuncio () {
                     <Form.Item name="title" label="Titolo"
                                rules={RequiredField('Inserisci un titolo')}
                                initialValue={''}>
-                        <input type='text' />
+                        <Input type='text' />
                     </Form.Item>
                     <Form.Item name="author" label="Autore"
                                rules={RequiredField('Inserisci un autore')}
                                initialValue={''}>
-                        <input type='text' />
+                        <Input type='text' />
                     </Form.Item>
                     <Form.Item name="category" label="Categoria"
                                rules={RequiredField('Seleziona una categoria')}
                                initialValue={'other'}>
                         <Select>
-                            <option value="university">Università</option>
-                            <option value="action">Azione</option>
-                            <option value="horror">Horror</option>
-                            <option value="non-fiction">Saggi</option>
-                            <option value="comic">Fumetti</option>
-                            <option value="fantasy">Fantasy</option>
-                            <option value="science">Scienza</option>
-                            <option value="mystery">Mistero</option>
-                            <option value="other">Altro</option>
+                            <Select.Option value="university">Università</Select.Option>
+                            <Select.Option value="action">Azione</Select.Option>
+                            <Select.Option value="horror">Horror</Select.Option>
+                            <Select.Option value="non-fiction">Saggi</Select.Option>
+                            <Select.Option value="comic">Fumetti</Select.Option>
+                            <Select.Option value="fantasy">Fantasy</Select.Option>
+                            <Select.Option value="science">Scienza</Select.Option>
+                            <Select.Option value="mystery">Mistero</Select.Option>
+                            <Select.Option value="other">Altro</Select.Option>
                         </Select>
                     </Form.Item>
                     <Form.Item name="ISBN" label="ISBN"
                                rules={RequiredField('Inserisci un ISBN')}
                                initialValue={''}>
-                        <input type='text' />
+                        <Input type='text' />
                     </Form.Item>
                     <Form.Item name="price" label="Prezzo"
                                rules={RequiredField('Seleziona un prezzo')}
                                initialValue={''}>
-                        <input type='number' />
+                        <Input type='number' />
                     </Form.Item>
                     <Form.Item name="condition" label="Condizione"
                                rules={RequiredField('Seleziona una condizione')}
                                initialValue={'new'}>
                         <Select>
-                            <option value="new">Nuovo</option>
-                            <option value="good">Buono</option>
-                            <option value="used">Usato</option>
-                            <option value="damaged">Danneggiato</option>
+                            <Select.Option value="new">Nuovo</Select.Option>
+                            <Select.Option value="good">Buono</Select.Option>
+                            <Select.Option value="used">Usato</Select.Option>
+                            <Select.Option value="damaged">Danneggiato</Select.Option>
                         </Select>
                     </Form.Item>
 
@@ -93,8 +93,7 @@ function AddAnnuncio () {
                         Inserisci l'annuncio
                     </Button>
                 </Form>
-                <br />
-                <Link className='text-black' href={"/"}>Torna alla home</Link>
+            <br/>
         </div>
 
     )

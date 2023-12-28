@@ -48,9 +48,7 @@ export async function PATCH(request: NextRequest) {
     } catch (error: any) {
         return NextResponse.json({
             message: error.message,
-        },
-            {
-                status: 400
+            status: 400
             }
         );
     }
@@ -67,10 +65,11 @@ export async function GET(request: NextRequest) {
         // retrieve the user without the password
         const user = await User.findById(userId).select("-password");
         return NextResponse.json({
-            data: user},{status:200});
+            data: user,
+            status:200});
     } catch (error: any) {
         return NextResponse.json({
-            message: "Unauthorized"},//error.message,
-            {status: 401,});
+            message: "Unauthorized",
+            status: 401,});
     }
 }

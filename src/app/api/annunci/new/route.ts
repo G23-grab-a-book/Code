@@ -15,9 +15,8 @@ export async function POST(request: NextRequest) {
 
         return NextResponse.json({
             message: "Ad created successfully",
-            data: newAd
-        },
-            {status: 201}
+            data: newAd,
+            status: 201}
         )
     } catch (error: any) {
         return NextResponse.json({

@@ -24,8 +24,8 @@ export async function POST(request: NextRequest) {
         const token = jwt.sign({ id: user._id }, process.env.jwt_secret!, { expiresIn: "7d" });
         
         const response = NextResponse.json({
-             message: "Login successfull"},
-             {status:200})
+            message: "Login successfull",
+            status:200})
         response.cookies.set("token", token, {
             httpOnly: true,
             path: "/",
@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
         return response;
     } catch (error: any) {
         return NextResponse.json({
-                message: "Unauthorized: " + error.message},
-                {status: 401});
+            message: "Unauthorized: " + error.message,
+            status: 401});
     }
 }
