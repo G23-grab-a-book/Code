@@ -58,3 +58,17 @@ input {
   'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
   'Noto Color Emoji';
 }
+
+.grid{
+  display: grid;
+  width: 95%;
+  margin: auto;
+  column-gap: 5%;
+}
+
+.grid-item-left{
+  grid-column: 1 / span 1;
+}
+.grid-item-right{
+  grid-column: 2 / span 1;
+}

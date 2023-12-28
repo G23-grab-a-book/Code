@@ -98,11 +98,8 @@ function Profile() {
         );
     }
 
-    return (
-        <div className="text">
-        <h1 className="mt-3 ml-5">Ciao {username},</h1>
-            <div className="flex justify-start h-screen mt-3">
-                <div className="ml-10 mt-10 ">
+    /*  FORM MODIFICA PROFILO
+    <div className="ml-10 mt-10 ">
                     <Form className='w-[500px]' layout='vertical' onFinish={onModify}>
                         <h1 className='text-2x1 font-bold'>Profilo</h1>
                         <hr />
@@ -131,7 +128,10 @@ function Profile() {
 
                     </Form>
                 </div>
-                <div className="ml-10 flex flex-col justify-center items-center h-screen">
+    */
+
+    /* LISTA PROPRI ANNUNCI
+        <div className="ml-10 flex flex-col justify-center items-center h-screen">
                     <Button type='primary' shape="default" size="large" href="/annunci/new">Aggiungi un nuovo annuncio</Button>
                     <h1 className="mt-6">I tuoi annunci</h1>
                     <ul style={{ listStyle: 'none', padding: 0 }}>
@@ -144,7 +144,7 @@ function Profile() {
                                     </div>
                                     <div style={{ textAlign: 'right', marginLeft: '4em' }}>
                                         <Button shape='round' type='primary' href={`/annunci/${announcement.id}`}>Apri Annuncio</Button>
-                                        <Popconfirm 
+                                        <Popconfirm
                                         title="Sei sicuro di voler eliminare questo annuncio?"
                                         okText="Si"
                                         cancelText="No"
@@ -157,8 +157,87 @@ function Profile() {
                         ))}
                     </ul>
                 </div>
+     */
+
+    return (
+        <div className="text">
+            <h1 className="mt-3 ml-5">Ciao {username},</h1>
+            <div className="flex justify-start mt-10">
+                <div className="grid">
+                    <div className="grid-item-left">
+                        <div className="m-10">
+                            <Form className='w-auto' layout='vertical' onFinish={onModify}>
+                                <h1 className='text-2x1 font-bold'>Profilo</h1>
+                                <hr/>
+                                <br/>
+
+                                <Form.Item name="username" label="Username" initialValue={username}
+                                           rules={RequiredField("Inserisci l'username")}>
+                                    <Input type='text' disabled={disable}/>
+
+                                </Form.Item>
+
+                                <Form.Item name="email" label="Email" initialValue={email}
+                                           rules={RequiredField("Inserisci l'email")}>
+                                    <Input type='email' disabled={disable}/>
+                                </Form.Item>
+
+                                <Form.Item name="password" label="Password" initialValue={''}>
+                                    <Input type='password' disabled={disable}/>
+                                </Form.Item>
+
+                                <Button type='primary' block onClick={enable} disabled={!disable}>
+                                    Modifica profilo
+                                </Button>
+
+                                <Button type='primary' htmlType='submit' block disabled={disable} loading={sending}>
+                                    Conferma modifica
+                                </Button>
+
+                            </Form>
+                        </div>
+                    </div>
+                    <div className="grid-item-right">
+                        <div className="m-10">
+                            <h1 className="text-2x1 font-bold">I tuoi annunci</h1>
+                            <hr/>
+                            <br/>
+                            <ul style={{listStyle: 'none', padding: 0}}>
+                                {announcements.map((announcement) => (
+                                    <li key={announcement.id} style={{
+                                        marginTop: '1em',
+                                        marginBottom: '1em',
+                                        border: '1px solid #ccc',
+                                        padding: '1em'
+                                    }}>
+                                        <div style={{display: 'flex', alignItems: 'center'}}>
+                                            <h2 style={{marginRight: '2em'}}>{announcement.title}</h2>
+                                            <div style={{flex: '1', textAlign: 'center'}}>
+                                                <p style={{color: 'grey'}}> di {announcement.author}</p>
+                                            </div>
+                                            <div style={{textAlign: 'right', marginLeft: '4em'}}>
+                                                <Button shape='round' type='primary'
+                                                        href={`/annunci/${announcement.id}`}>Apri Annuncio</Button>
+                                                <Popconfirm
+                                                    title="Sei sicuro di voler eliminare questo annuncio?"
+                                                    okText="Si"
+                                                    cancelText="No"
+                                                    onConfirm={() => adDelete(announcement)}>
+                                                    <Button shape='round' style={{marginLeft: "1em"}} type='primary'
+                                                            icon={<DeleteOutlined/>} danger>Elimina</Button>
+                                                </Popconfirm>
+                                            </div>
+                                        </div>
+                                    </li>
+                                ))}
+                            </ul>
+                            <Button type='primary' shape="default" size="large" href="/annunci/new">Aggiungi un nuovo
+                                annuncio</Button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            </div>
+        </div>
     );
 }
 
