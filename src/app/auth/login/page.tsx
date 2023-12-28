@@ -1,6 +1,6 @@
 "use client"
 import { RequiredField } from "@/app/helpers/validation";
-import { Button, Form, message } from "antd"
+import {Button, Form, Input, message} from "antd"
 import axios from "axios";
 import Link from "next/link"
 import React, { useState } from "react";
@@ -41,7 +41,7 @@ function Login() {
         }
     };
     return (
-        <div>
+        <div className="text">
             <div className="forms">
                 <Form className='w-[500px]-m-auto' layout='vertical' onFinish={onLogin} >
                     <h1 className='text-2x1 font-bold'>Accedi</h1>
@@ -50,12 +50,12 @@ function Login() {
                     <Form.Item name="username" label="Username"
                         rules={RequiredField('Please insert the username')}
                         initialValue={''}>
-                        <input type='text' />
+                        <Input type='text' />
                     </Form.Item>
                     <Form.Item name="password" label="password"
                         rules={RequiredField('Please insert the password')}
                         initialValue={''}>
-                        <input type='password' />
+                        <Input type='password' />
                     </Form.Item>
                     <Button type='primary' htmlType='submit' block loading={loading}>
                         Login
@@ -65,7 +65,7 @@ function Login() {
                 </Form>
                 <br />
                 <Link href="/auth/register" className='text-black'>
-                        Non hai anora un account? Registrati.
+                        Non hai ancora un account? Registrati.
                     </Link>
             </div>
         </div>

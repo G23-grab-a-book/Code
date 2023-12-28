@@ -1,5 +1,5 @@
 "use client";
-import { Button, Form, message, Spin } from "antd";
+import {Button, Form, Input, message, Spin} from "antd";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { RequiredField } from "../helpers/validation";
@@ -63,7 +63,8 @@ function Profile() {
     }
 
     return (
-        <><h1 className="mt-3 ml-5">Ciao {username},</h1>
+        <><div className="text">
+        <h1 className="mt-3 ml-5">Ciao {username},</h1>
         <div className="flex justify-start h-screen mt-3">
             <div className="ml-10 ">
                 <Form className='w-[500px]' layout='vertical' onFinish={onModify}>
@@ -72,16 +73,16 @@ function Profile() {
                     <br />
 
                     <Form.Item name="username" label="Username" initialValue={username} rules={RequiredField('Please insert the username')}>
-                        <input type='text' disabled={disable} />
+                        <Input type='text' disabled={disable} />
 
                     </Form.Item>
 
                     <Form.Item name="email" label="Email" initialValue={email} rules={RequiredField('Please insert the email')}>
-                        <input type='email' disabled={disable} />
+                        <Input type='email' disabled={disable} />
                     </Form.Item>
 
                     <Form.Item name="password" label="Password" initialValue={''}>
-                        <input type='password' disabled={disable} />
+                        <Input type='password' disabled={disable} />
                     </Form.Item>
 
                     <Button type='primary' block onClick={enable} disabled={!disable}>
@@ -97,7 +98,9 @@ function Profile() {
             <div className="ml-64 flex justify-center items-center h-screen">
                 <Button type='primary' shape="default" size="large" href="/annunci/new">Aggiungi un nuovo annuncio</Button>
             </div>
-        </div></>
+        </div>
+        </div>
+        </>
     );
 }
 

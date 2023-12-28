@@ -63,13 +63,13 @@ export default function Search() {
   }
 
   return (
-    <><div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <><div className="text"><div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       {announcements.length === 0 ? (
         <div className="flex justify-center items-center h-screen">
           <p>Nessun annuncio trovato. Riprovare con una ricerca diversa</p>
         </div>
       ) : (
-        <ul style={{ listStyle: 'none', padding: 0 }}>
+        <ul style={{ listStyle: 'none', padding: 0 }} className="text">
           {announcements.map((announcement) => (
             <li key={announcement.id} style={{ marginTop: '1em', marginBottom: '1em', border: '1px solid #ccc', padding: '1em' }}>
               <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -87,6 +87,6 @@ export default function Search() {
           ))}
         </ul>
       )}
-    </div></>
+    </div></div></>
   );
 };
