@@ -1,6 +1,6 @@
 'use client'
 import { RequiredField } from "@/app/helpers/validation";
-import { Button, Form, message } from "antd"
+import {Button, Form, Input, message} from "antd"
 import axios from "axios";
 import Link from "next/link"
 import { useRouter } from 'next/navigation';
@@ -29,7 +29,7 @@ function Register () {
     };
 
     return (
-        <div>
+        <div className="text">
             <div className="forms">
                 <Form className='w-[500px]-m-auto' layout='vertical' onFinish={onRegister}>
                     <h1 className='text-2x1 font-bold'>Registrati</h1>
@@ -39,18 +39,18 @@ function Register () {
                      <Form.Item name="username" label="Username"
                             rules={RequiredField('Please insert the username')}
                             initialValue={''}>
-                        <input type='text' />
+                        <Input type='text' />
 
                     </Form.Item>
                     <Form.Item name="email" label="Email"
                             rules={RequiredField('Please insert the email')}
                             initialValue={''}>
-                        <input type='email' />
+                        <Input type='email' />
                     </Form.Item>
                     <Form.Item name="password" label="Password"
                             rules={RequiredField('Please insert the password')}
                             initialValue={''}>
-                        <input type='password' />
+                        <Input type='password' />
                     </Form.Item>
                     <Button type='primary' htmlType='submit' block loading={loading}>
                         Register

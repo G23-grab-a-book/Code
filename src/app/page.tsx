@@ -85,7 +85,7 @@ export default function Home() {
 
   if (isLoading) {
       return (
-          <><div className="flex justify-center"><h1 style={{ marginTop: '1em', marginBottom: '1em' }}>Gli ultimi annunci pubblicati</h1></div><div className="flex justify-center h-screen">
+          <><div className="flex justify-center"><h1 style={{ marginTop: '1em', marginBottom: '1em' }} className="text">Gli ultimi annunci pubblicati</h1></div><div className="flex justify-center h-screen">
           <Spin size="large" />
         </div></>
       );
@@ -93,7 +93,7 @@ export default function Home() {
 
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} className="text">
       <h1 style={{ marginTop: '1em', marginBottom: '1em' }}>Gli ultimi annunci pubblicati</h1>
       <ul style={{ listStyle: 'none', padding: 0 }}>
         {announcements.map((announcement) => (

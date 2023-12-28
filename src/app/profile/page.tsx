@@ -1,5 +1,5 @@
 "use client";
-import { Button, Form, message, Popconfirm, Spin } from "antd";
+import { Button, Form, Input, message, Popconfirm, Spin } from "antd";
 import { DeleteOutlined } from '@ant-design/icons';
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -99,7 +99,8 @@ function Profile() {
     }
 
     return (
-        <><h1 className="mt-3 ml-5">Ciao {username},</h1>
+        <div className="text">
+        <h1 className="mt-3 ml-5">Ciao {username},</h1>
             <div className="flex justify-start h-screen mt-3">
                 <div className="ml-10 mt-10 ">
                     <Form className='w-[500px]' layout='vertical' onFinish={onModify}>
@@ -107,18 +108,18 @@ function Profile() {
                         <hr />
                         <br />
 
-                        <Form.Item name="username" label="Username" initialValue={username} rules={RequiredField('Please insert the username')}>
-                            <input type='text' disabled={disable} />
+                        <Form.Item name="username" label="Username" initialValue={username} rules={RequiredField("Inserisci l'username")}>
+                            <Input type='text' disabled={disable} />
 
                         </Form.Item>
 
-                        <Form.Item name="email" label="Email" initialValue={email} rules={RequiredField('Please insert the email')}>
-                            <input type='email' disabled={disable} />
-                        </Form.Item>
+                    <Form.Item name="email" label="Email" initialValue={email} rules={RequiredField("Inserisci l'email")}>
+                        <Input type='email' disabled={disable} />
+                    </Form.Item>
 
-                        <Form.Item name="password" label="Password" initialValue={''}>
-                            <input type='password' disabled={disable} />
-                        </Form.Item>
+                    <Form.Item name="password" label="Password" initialValue={''}>
+                        <Input type='password' disabled={disable} />
+                    </Form.Item>
 
                         <Button type='primary' block onClick={enable} disabled={!disable}>
                             Modifica profilo
@@ -156,7 +157,8 @@ function Profile() {
                         ))}
                     </ul>
                 </div>
-            </div></>
+            </div>
+            </div>
     );
 }
 
