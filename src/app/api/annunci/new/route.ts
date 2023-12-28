@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
         await newAd.save();
 
         return NextResponse.json({
-            message: "Ad created successfully",
+            message: "Annuncio creato con successo",
             data: newAd,
             status: 201}
         )

@@ -49,7 +49,7 @@ const Header = () => {
     <><header className="app-header">
       <div className="left-section">
         <div className="title">
-            <Link href={"/"} className="text"><h1 className="grab-a-book">Grab a Book</h1></Link>
+            <a href={"/"} className="text"><h1 className="grab-a-book">Grab a Book</h1></a>
         </div>
       </div>
       <div className="center-section">
