@@ -1,10 +1,10 @@
 const url = "http://localhost:3000/api/auth/login";
 const mongoose = require('mongoose');
-// const fetch = require("node-fetch");
- require("dotenv").config();
-
+require("dotenv").config();
+jest.useRealTimers();
 describe("POST /api/auth/login", () => {
     beforeAll( async () => {
+        jest.useFakeTimers('legacy');
         jest.setTimeout(8000);
         await mongoose.connect(process.env.mongo_url);
     });
@@ -18,16 +18,25 @@ describe("POST /api/auth/login", () => {
             method: 'POST',
             body: JSON.stringify({username: 'accountnotregistered', password: 'password'})
         });
-        expect((await response.json()).status).toEqual(401);
+        expect((await response.json()).message).toEqual('User does not exist');
     });
 
-    test('POST /api/auth/login with Account registered', async () => {
+    test('POST /api/auth/login with Account registered but wrong password', async () => {
+
+        var response = await fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({username: 'ale', password: 'as'})
+        });
+        expect((await response.json()).message).toEqual('Invalid credentials');
+    });
+
+    test('POST /api/auth/login with Account registered & the right password', async () => {
 
         var response = await fetch(url, {
             method: 'POST',
             body: JSON.stringify({username: 'ale', password: 'ale'})
         });
-        expect((await response.json()).status ).toEqual(200);
+        expect((await response.json()).message).toEqual('Login successful');
     });
 
 });
