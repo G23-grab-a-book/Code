@@ -65,6 +65,12 @@ function AddAnnuncio() {
                         <Select.Option value="fantasy">Fantasy</Select.Option>
                         <Select.Option value="scienza">Scienza</Select.Option>
                         <Select.Option value="mistero">Mistero</Select.Option>
+                        <Select.Option value="giallo">Giallo</Select.Option>
+                        <Select.Option value="storia">Storia</Select.Option>
+                        <Select.Option value="rosa">Rosa</Select.Option>
+                        <Select.Option value="cucina">Cucina</Select.Option>
+                        <Select.Option value="poesia">Poesia</Select.Option>
+                        <Select.Option value="fotografia">Fotografia</Select.Option>
                         <Select.Option value="altro">Altro</Select.Option>
                     </Select>
                 </Form.Item>
@@ -83,6 +89,7 @@ function AddAnnuncio() {
                     initialValue={'nuovo'}>
                     <Select>
                         <Select.Option value="nuovo">Nuovo</Select.Option>
+                        <Select.Option value="ottimo">Ottimo</Select.Option>
                         <Select.Option value="buono">Buono</Select.Option>
                         <Select.Option value="usato">Usato</Select.Option>
                         <Select.Option value="danneggiato">Danneggiato</Select.Option>

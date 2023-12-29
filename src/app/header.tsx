@@ -12,6 +12,7 @@ import MenuItem from "antd/es/menu/MenuItem";
 import axios from "axios";
 import logo from "../../public/Logo.png";
 import Image from "next/image";
+import {Tooltip} from "react-tooltip";
 
 const Header = () => {
 
@@ -60,11 +61,26 @@ const Header = () => {
       </div>
       <div className="center-section">
         <Input.Search
-          className={"search-input"}
+          className="search-input"
           placeholder="Cerca un libro..."
           size='large'
           onSearch={onSearch}
-          enterButton />
+          enterButton
+          />
+          <Tooltip anchorSelect=".search-input" place="bottom-start">
+            <p className="text">
+              Inserisci il nome del libro che vuoi cercare<br/>
+              Per cercare un libro in base al suo isbn puoi inserirlo senza trattini e spazi<br/>
+              Se vuoi cercare una certa categoria, o un certo autore puoi scrivere: <br/>
+              <ul style={{marginLeft: "5%"}}>
+                <li>categoria:&#34;horror&#34;</li>
+                <li>autore:&#34;pirandello&#34;</li>
+              </ul>
+              <hr style={{marginTop:"1%", marginBottom:"1%"}}/>
+              Puoi effettuare la ricerca così per titolo, autore, categoria ed isbn
+
+            </p>
+          </Tooltip>
       </div>
       <div className="right-section">
         <div className="profile">
