@@ -1,7 +1,6 @@
 import { validateJWT } from "@/app/helpers/validatejwt";
 import { connectDB } from "../../../../../dbConfig";
 import Annunce from "@/app/models/announceModel";
-import { INTERNALS } from "next/dist/server/web/spec-extension/request";
 import { NextRequest, NextResponse } from "next/server";
 
 connectDB();
@@ -9,16 +8,7 @@ connectDB();
 export async function GET(request: NextRequest) {
     try {
         let AnnunceList = [];
-        // console.log("hey");
-        // const body = await request.json();
-        // console.log(body);
-        // const newAnnunce = new Annunce(body);
-        // console.log(newAnnunce);
-        // newAnnunce.save();
-        // console.log(request);
         const searchUrl = request.nextUrl.searchParams.get("search");
-        // const search: string = reqBody.search;
-        // check if the string is a number
         let search:string;
         if (searchUrl == null) {
             search = "";
@@ -29,15 +19,12 @@ export async function GET(request: NextRequest) {
         const isNum = /^\d+$/.test(search);
         if (isNum) {
             AnnunceList = await Annunce.find({ ISBN: search });
-            // console.log(AnnunceList);
         } else {
             if (search.includes(':"')) {
                 const splitted = search.split('"');
                 console.log(splitted);
                 const typeOfSearch = splitted[0].split(':')[0];
-                // const splitted2 = splitted[1].split('"');
                 const searchTerm = splitted[1];
-                //console.log(splitted, searchTerm);
                 if (typeOfSearch.toLowerCase() === "titolo") {
                     AnnunceList = await Annunce.find({ title: {$regex:new RegExp(`.*${searchTerm}.*`,"i")} });
                     if (splitted.length > 3) {
@@ -79,11 +66,9 @@ export async function GET(request: NextRequest) {
                         {status: 200}
                         )
                 }
-                console.log("searching for: " + search);
+                // console.log("searching for: " + search);
                 AnnunceList = await Annunce.find({ title: {$regex:new RegExp(`.*${search}.*`,"i")} });
             }
-            // const title = search;
-            // AnnunceList = await Annunce.find({ title: title });
         }
         return NextResponse.json({
             message: "Search completed successfully",
@@ -115,7 +100,7 @@ function multiOptionFilter(splitted: string[], AnnunceList: any[]): any[] {
             AnnunceList = AnnunceList.filter((annunce) => {
                 return annunce.ISBN === search;
             });
-            console.log(AnnunceList);
+            // console.log(AnnunceList);
         } else if (searchType == "titolo") {
             AnnunceList = AnnunceList.filter((annunce) => {
                 return annunce.title.toLowerCase().includes(search.toLowerCase());
