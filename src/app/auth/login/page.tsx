@@ -4,7 +4,7 @@ import {Button, Form, Input, message} from "antd"
 import axios from "axios";
 import Link from "next/link"
 import React, { useState } from "react";
-import Router, { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 
 interface userType {
@@ -33,7 +33,9 @@ function Login() {
                     router.push(search);
                     return;
                 }
-                router.push("/");
+                router.refresh();
+                router.push("/profile");
+                router.refresh();
             }
         } catch (error: any) {
             setLoading(false);
