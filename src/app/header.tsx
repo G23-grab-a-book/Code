@@ -1,5 +1,5 @@
 'use client'
-import React from 'react';
+import React, {useState} from 'react';
 import { Input, Button, message } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
@@ -17,13 +17,6 @@ import {Tooltip} from "react-tooltip";
 const Header = () => {
 
   const router = useRouter();
-  // function handleProfileClick() {
-  //   try {
-  //     router.push("/profile");
-  //   } catch (e) {
-  //     message.error("Please log in");
-  //   }
-  // }
 
   const onSearch = async (value: string) => {
     try {
@@ -69,15 +62,14 @@ const Header = () => {
           />
           <Tooltip anchorSelect=".search-input" place="bottom-start">
             <p className="text">
-              Inserisci il nome del libro che vuoi cercare<br/>
-              Per cercare un libro in base al suo isbn puoi inserirlo senza trattini e spazi<br/>
-              Se vuoi cercare una certa categoria, o un certo autore puoi scrivere: <br/>
+              Puoi effettuare la ricerca per titolo, isbn, autore e categoria<br/>
+              Inserisci il titolo del libro che vuoi cercare oppure il codice isbn senza trattini e spazi<br/>
+              <hr style={{marginTop: "1%", marginBottom: "1%"}}/>
+              Se vuoi cercare per categoria o autore scrivi: <br/>
               <ul style={{marginLeft: "5%"}}>
-                <li>categoria:&#34;horror&#34;</li>
-                <li>autore:&#34;pirandello&#34;</li>
+                <li>categoria:&#34;Horror&#34;</li>
+                <li>autore:&#34;Pirandello&#34;</li>
               </ul>
-              <hr style={{marginTop:"1%", marginBottom:"1%"}}/>
-              Puoi effettuare la ricerca così per titolo, autore, categoria ed isbn
 
             </p>
           </Tooltip>
