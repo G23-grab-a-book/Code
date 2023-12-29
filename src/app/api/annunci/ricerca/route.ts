@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
         } else {
             if (search.includes(':"')) {
                 const splitted = search.split('"');
-                console.log(splitted);
+                // console.log(splitted);
                 const typeOfSearch = splitted[0].split(':')[0];
                 const searchTerm = splitted[1];
                 if (typeOfSearch.toLowerCase() === "titolo") {
@@ -48,7 +48,7 @@ export async function GET(request: NextRequest) {
                 }
             } else {
                 if (search === "last") { // this is a search for the last 3 annunces used only on the home page
-                    console.log(AnnunceList = await Annunce.find());
+                    // console.log(AnnunceList = await Annunce.find());
                     AnnunceList = await Annunce.find().sort({ _id: -1 }).limit(3);
                     return NextResponse.json({
                         message: "Search completed successfully",
@@ -57,9 +57,9 @@ export async function GET(request: NextRequest) {
                         )
                 } else if (search === "user") { // this is a search by userId used only for the profile page so dosn't need to be filtered more
                     const userId = await validateJWT(request);
-                    console.log(userId);
+                    // console.log(userId);
                     AnnunceList = await Annunce.find({ seller: userId });
-                    console.log(AnnunceList);
+                    // console.log(AnnunceList);
                     return NextResponse.json({
                         message: "Search completed successfully",
                         data: AnnunceList},
@@ -96,7 +96,7 @@ function multiOptionFilter(splitted: string[], AnnunceList: any[]): any[] {
                 return annunce.category.toLowerCase().includes(search.toLowerCase());
             });
         } else if (searchType == "isbn") {
-            console.log("isbn");
+            // console.log("isbn");
             AnnunceList = AnnunceList.filter((annunce) => {
                 return annunce.ISBN === search;
             });

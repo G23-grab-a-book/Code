@@ -58,7 +58,7 @@ export async function GET(request: NextRequest) {
     try {
         // const userId = await validateJWT(request);
         var userId = request.nextUrl.searchParams.get("user");
-        console.log(userId);
+        // console.log(userId);
         if (!userId) {
             userId = await validateJWT(request);
         }

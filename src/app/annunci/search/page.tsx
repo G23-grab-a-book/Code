@@ -44,7 +44,7 @@ export default function Search() {
       }
       setAnnouncements(annunci);
       setIsLoading(false);
-      console.log(announcements);
+      // console.log(announcements);
     } catch (error) {
       setIsLoading(false);
       message.error((error as any).response.data.message);

@@ -27,7 +27,7 @@ function Profile() {
         setDisable(false);
     }
     function notEnable() {
-        console.log("HE");
+        // console.log("HE");
         setDisable(true);
     }
 
@@ -49,7 +49,7 @@ function Profile() {
                     seller: annunci_response.data.data[i].seller,
                 };
                 annunci.push(annuncio);
-                console.log(annuncio);
+                // console.log(annuncio);
             }
             setAnnouncements(annunci);
             setLoading(false); // Segnala che il caricamento è completato

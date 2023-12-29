@@ -23,7 +23,7 @@ const Header = () => {
       const val = await axios.get("api/user");
       setLogged(true);
     }catch (e){
-      console.log("not logged");
+      // console.log("not logged");
       setLogged(false);
     }
   }
@@ -44,7 +44,7 @@ const Header = () => {
   };
   const onLogout = async () => {
     try {
-      console.log("logout");
+      // console.log("logout");
       const res = await axios.get("/api/auth/logout");
       message.success(res.data.message);
       isLogged();

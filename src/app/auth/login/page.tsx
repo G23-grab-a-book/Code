@@ -19,7 +19,7 @@ function Login() {
         try {
             setLoading(true);
             const res = await axios.post("/api/auth/login", values);
-            console.log(res)
+            // console.log(res)
             if(res.data.status == 401){
                 setLoading(false);
                 message.error(res.data.message);

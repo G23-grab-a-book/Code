@@ -19,13 +19,13 @@ function AddAnnuncio() {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const onAddAnnuncio = async (values: annuncioType) => {
-        console.log(values);
+        // console.log(values);
         try {
             setLoading(true);
             const res = await axios.post("/api/annunci/new", values);
             message.success("Annuncio creato con successo!");
             const id = res.data.data._id;
-            console.log(res.data.data._id);
+            // console.log(res.data.data._id);
             setLoading(false);
             router.push("/annunci/" + id);
         } catch (error: any) {

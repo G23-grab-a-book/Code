@@ -15,7 +15,7 @@ function Register () {
     const router = useRouter();
     const [loading, setLoading] = useState(false); 
     const onRegister = async (values: userType) => {
-        console.log(values);
+        // console.log(values);
         try {
             setLoading(true);
             await axios.post("/api/auth/register", values);

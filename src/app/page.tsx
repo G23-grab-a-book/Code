@@ -73,7 +73,7 @@ export default function Home() {
           }
           setAnnouncements(annunci);
           setIsLoading(false);
-          console.log(announcements);
+          // console.log(announcements);
       } catch (error) {
           setIsLoading(false);
           message.error((error as any).response.data.message);
@@ -81,7 +81,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    console.log("search");
+    // console.log("search");
       onSearch("last");
   },[]);
 
