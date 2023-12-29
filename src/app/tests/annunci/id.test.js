@@ -2,9 +2,17 @@ const url = "http://localhost:3000/api/annunci/";
 const fakeID = "aaaaaaaaaaaaaaaaaaaaaaaa"; // non esiste
 const realID = "658da30450e3b1cfbd63c5ab"; //il fu mattia pascal 15€
 require("dotenv").config();
+const mongoose = require('mongoose');
 
 describe("GET /api/annunci/[id]", () =>{
 
+    beforeAll( async () => {
+        jest.setTimeout(8000);
+        await mongoose.connect(process.env.mongo_url);
+    });
+    afterAll( () => {
+        mongoose.connection.close(true);
+    });
     test('GET works with real id', async () => {
         var response = await fetch(url+realID, {
             method: 'GET'

@@ -1,6 +1,5 @@
 import { connectDB } from "../../../../../dbConfig";
 import Annunce from "@/app/models/announceModel";
-import { INTERNALS } from "next/dist/server/web/spec-extension/request";
 import { NextRequest, NextResponse } from "next/server";
 
 connectDB();
