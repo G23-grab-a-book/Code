@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
         // check if user exists in the DB or not
         const user = await User.findOne({ username: reqBody.username });
         if (!user) {
-            throw new Error("Nome utente già esistente");
+            throw new Error("Nome utente non esistente");
         }
         // password match
         const passwordMatch = await bcrypt.compare(reqBody.password, user.password);
