@@ -5,10 +5,7 @@ import { UserOutlined } from '@ant-design/icons';
 
 
 import './header.css';// File CSS per lo stile dell'header
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import DropdownButton from "antd/es/dropdown/dropdown-button";
-import MenuItem from "antd/es/menu/MenuItem";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
 import logo from "../../public/Logo.png";
 import Image from "next/image";
@@ -18,6 +15,8 @@ const Header = () => {
 
   const router = useRouter();
   const [logged, setLogged] = useState(false);
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
 
   const isLogged = async () =>{
     try{
@@ -30,7 +29,7 @@ const Header = () => {
   }
   useEffect(() => {
     isLogged();
-  }, []);
+  }, [pathname, searchParams]);
 
   const onSearch = async (value: string) => {
     try {
