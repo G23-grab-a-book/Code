@@ -49,7 +49,7 @@ export async function PATCH(request: NextRequest) {
         return NextResponse.json({
             message: error.message,
             status: 400
-            }
+            }, {status: 400}
         );
     }
 }
@@ -70,6 +70,6 @@ export async function GET(request: NextRequest) {
     } catch (error: any) {
         return NextResponse.json({
             message: "Unauthorized",
-            status: 401,});
+            status: 401,}, {status: 401});
     }
 }

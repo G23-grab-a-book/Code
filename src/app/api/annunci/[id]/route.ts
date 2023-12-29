@@ -7,10 +7,9 @@ connectDB();
 export async function GET(request: NextRequest, {params}: {params:{id:string}}){
     try{
         const ad = await Ad.findOne({_id: params.id});
-        console.log("ad: " + ad);
         return NextResponse.json({ad, status: 200});
     }catch (error: any) {
-        return NextResponse.json({ message: error.message, status: 500 });
+        return NextResponse.json({ message: "Bad request"+error.message, status: 400 }, {status: 400});
     }
 }
 
@@ -20,12 +19,12 @@ export async function DELETE(request: NextRequest, {params}: {params:{id:string}
         const ad = await Ad.findOne({_id: params.id});
         if (ad.seller != userId) {
             console.log("ad.seller: " + ad.seller);
-            return NextResponse.json({message:'Non puoi eliminare questo annuncio!', status: 401});
+            return NextResponse.json({message:'Non puoi eliminare questo annuncio!', status: 200}, {status: 401});
         } else {
             await Ad.findOneAndDelete({_id: params.id});
             return NextResponse.json({message:'Annuncio eliminato con successo!', status: 200});
         }
     }catch (error: any) {
-        return NextResponse.json({ message: error.message, status: 500 });
+        return NextResponse.json({ message: "Bad request"+error.message, status: 400 }, {status: 400});
     }
 }

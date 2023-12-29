@@ -94,7 +94,7 @@ export async function GET(request: NextRequest) {
         console.log(error);
         return NextResponse.json({
             message: "Bad request",
-            status: 400});
+            status: 400}, {status: 400});
     }
 }
 

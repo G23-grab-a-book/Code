@@ -3,7 +3,7 @@
   "info": {
     "version": "1.0.0",
     "title": "Grab a Book",
-    "description": "API della web-app Grab a Book realizzate per il progetto di ingegneria del software dell'anno 2023/24 dal gruppo G23.\nAlcune API funzionano solo se si è loggati:\n- Modifica un utente (PATCH /api/user)\n- Crea un nuovo annuncio (POST /api/annunci/new)\n- Elimina un annuncio (DELETE /api/annunci/{id})\n- Ottenere le informazini su se stessi (GET /api/user)\n\nÈ possibile quindi inserire il valore del token presente nei cookie quando si effettua il login per utilizzare queste API"
+    "description": "API della web-app Grab a Book realizzate per il progetto di ingegneria del software dell'anno 2023/24 dal gruppo G23.\nAlcune API funzionano solo se si è loggati:\n- Modifica un utente (PATCH /api/user)\n- Crea un nuovo annuncio (POST /api/annunci/new)\n- Elimina un annuncio (DELETE /api/annunci/{id})\n- Ottenere le informazini su se stessi (GET /api/user)\n\nNormalmente se si accede a questa pagina dalla web-app, dato che le richieste sono fatte dallo stesso dominio, una volta eseguito il login l'autenticazione è automatica.\n\n Nel caso in cui questo non avvenga è possibile inserire il valore del token presente nei cookie quando si effettua il login per utilizzare queste API"
   },
   "tags": [
     {
@@ -217,26 +217,23 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "titolo": {
+                  "title": {
                     "$ref": "#/definitions/annuncio/properties/titolo"
                   },
-                  "autore": {
+                  "author": {
                     "$ref": "#/definitions/annuncio/properties/autore"
                   },
-                  "categoria": {
+                  "category": {
                     "$ref": "#/definitions/annuncio/properties/categoria"
                   },
                   "ISBN": {
                     "$ref": "#/definitions/annuncio/properties/ISBN"
                   },
-                  "prezzo": {
+                  "price": {
                     "$ref": "#/definitions/annuncio/properties/prezzo"
                   },
-                  "condizione": {
+                  "condition": {
                     "$ref": "#/definitions/annuncio/properties/condizione"
-                  },
-                  "venditore": {
-                    "$ref": "#/definitions/annuncio/properties/venditore"
                   }
                 }
               }
@@ -251,25 +248,25 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "titolo": {
+                    "title": {
                       "$ref": "#/definitions/annuncio/properties/titolo"
                     },
-                    "autore": {
+                    "author": {
                       "$ref": "#/definitions/annuncio/properties/autore"
                     },
-                    "categoria": {
+                    "category": {
                       "$ref": "#/definitions/annuncio/properties/categoria"
                     },
                     "ISBN": {
                       "$ref": "#/definitions/annuncio/properties/ISBN"
                     },
-                    "prezzo": {
+                    "price": {
                       "$ref": "#/definitions/annuncio/properties/prezzo"
                     },
-                    "condizione": {
+                    "condition": {
                       "$ref": "#/definitions/annuncio/properties/condizione"
                     },
-                    "venditore": {
+                    "seller": {
                       "$ref": "#/definitions/annuncio/properties/venditore"
                     }
                   }
@@ -278,7 +275,7 @@
             }
           },
           "400": {
-            "description": "Errore nell'inserimento nell'aggiunta dell'annuncio al database"
+            "description": "Errore nell'aggiunta dell'annuncio al database"
           }
         }
       }

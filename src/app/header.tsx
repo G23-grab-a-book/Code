@@ -50,7 +50,7 @@ const Header = () => {
   return (
     <><header className="app-header">
       <div className="left-section">
-        <div className="title">
+        <div className="header-title">
             <a href={"/"} className="grab-a-book">
               <h1 className="text">
                 <Image src={logo} alt="logo" width={30} height={30} className="logo"/>
