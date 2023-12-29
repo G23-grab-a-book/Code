@@ -57,7 +57,7 @@ function Login() {
                         initialValue={''}>
                         <Input type='password' />
                     </Form.Item>
-                    <Button type='primary' htmlType='submit' block loading={loading}>
+                    <Button type='primary' style={{marginLeft:"0.25em", marginBottom:"5px"}} htmlType='submit' block loading={loading}>
                         Login
                     </Button>
 

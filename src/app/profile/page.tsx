@@ -186,11 +186,11 @@ function Profile() {
                                     <Input type='password' disabled={disable}/>
                                 </Form.Item>
 
-                                <Button type='primary' block onClick={enable} disabled={!disable}>
+                                <Button type='primary' style={{marginLeft:"0.25em", marginBottom:"5px"}} block onClick={enable} disabled={!disable}>
                                     Modifica profilo
                                 </Button>
 
-                                <Button type='primary' htmlType='submit' block disabled={disable} loading={sending}>
+                                <Button type='primary' style={{marginLeft:"0.25em"}} htmlType='submit' block disabled={disable} loading={sending}>
                                     Conferma modifica
                                 </Button>
 
