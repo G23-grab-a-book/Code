@@ -90,7 +90,7 @@ function AddAnnuncio() {
                 </Form.Item>
 
                 <Button shape="default" size="large" type='primary' htmlType='submit'  block loading={loading}>
-                    Inserisci l'annuncio
+                    Inserisci l&#39;annuncio
                 </Button>
             </Form>
             <br />
