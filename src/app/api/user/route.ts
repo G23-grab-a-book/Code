@@ -47,9 +47,9 @@ export async function PATCH(request: NextRequest) {
         })
     } catch (error: any) {
         return NextResponse.json({
-            message: error.message,
+            message: "Bad request: " + error.message,
             status: 400
-            }
+            }, {status: 400}
         );
     }
 }
@@ -58,7 +58,7 @@ export async function GET(request: NextRequest) {
     try {
         // const userId = await validateJWT(request);
         var userId = request.nextUrl.searchParams.get("user");
-        console.log(userId);
+        // console.log(userId);
         if (!userId) {
             userId = await validateJWT(request);
         }
@@ -66,10 +66,11 @@ export async function GET(request: NextRequest) {
         const user = await User.findById(userId).select("-password");
         return NextResponse.json({
             data: user,
+            message: "Ok",
             status:200});
     } catch (error: any) {
         return NextResponse.json({
-            message: "Unauthorized: " + error.message,
-            status: 401,});
+            message: "Bad request",
+            status: 400,}, {status: 400});
     }
 }

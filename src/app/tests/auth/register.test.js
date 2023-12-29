@@ -18,7 +18,7 @@ describe("POST /api/auth/register", () => {
             method: 'POST',
             body: JSON.stringify({email: 'paolazzialessio@gmail.com', username: 'ale', password: 'ale'})
         });
-        expect((await response.json()).message).toEqual('Unauthorized: Email already exists');
+        expect((await response.json()).message).toEqual('Unauthorized: Email già esistente');
     });
 
     test('POST /api/auth/register with Username already Existing', async () => {
@@ -27,7 +27,7 @@ describe("POST /api/auth/register", () => {
             method: 'POST',
             body: JSON.stringify({email: 'blabla1@gmail.com', username: 'ale', password: 'ale'})
         });
-        expect((await response.json()).message).toEqual('Unauthorized: Username already exists');
+        expect((await response.json()).message).toEqual('Unauthorized: Nome utente già esistente');
     });
 
     
@@ -37,7 +37,7 @@ describe("POST /api/auth/register", () => {
     //         method: 'POST', // change email & username when rerunning this test.
     //         body: JSON.stringify({email: 'blabla5@gmail.com', username: 'bla5', password: 'bla'})
     //     });
-    //     expect((await response.json()).message).toEqual('User created successfully');
+    //     expect((await response.json()).message).toEqual('Utente creato con successo');
         
     // });
 

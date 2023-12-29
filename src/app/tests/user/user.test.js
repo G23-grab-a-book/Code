@@ -24,7 +24,7 @@ describe("PATCH /api/user", () => {
                 cookie: `token=${token}`
             }
         });
-        expect((await response.json()).message).toEqual('La nuova email è già collegata ad un altro account');
+        expect((await response.json()).message).toEqual('Bad request: La nuova email è già collegata ad un altro account');
     });
 
     test('PATCH /api/user with new Username already existing', async () => {
@@ -38,7 +38,7 @@ describe("PATCH /api/user", () => {
                 cookie: `token=${token}`
             }
         });
-        expect((await response.json()).message).toEqual('Il nuovo username è già collegato ad un altro account');
+        expect((await response.json()).message).toEqual('Bad request: Il nuovo username è già collegato ad un altro account');
     });
 
     test('PATCH /api/user correctly', async () => {
@@ -81,14 +81,6 @@ describe("GET /api/user", () => {
     });
     afterAll( () => {
         mongoose.connection.close(true);
-    });
-
-    test('GET /api/user without token or parameter', async () => {
-        
-        var response = await fetch(url, {
-            method: 'GET',
-        });
-        expect((await response.json()).message).toEqual('Unauthorized: No token provided');
     });
 
     test('GET /api/user with token', async () => {

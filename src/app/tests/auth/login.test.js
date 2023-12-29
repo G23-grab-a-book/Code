@@ -17,7 +17,7 @@ describe("POST /api/auth/login", () => {
             method: 'POST',
             body: JSON.stringify({username: 'accountnotregistered', password: 'password'})
         });
-        expect((await response.json()).message).toEqual('Unauthorized: User does not exist');
+        expect((await response.json()).message).toEqual('Unauthorized: Nome utente non esistente');
     });
 
     test('POST /api/auth/login with Account registered but wrong password', async () => {
@@ -26,7 +26,7 @@ describe("POST /api/auth/login", () => {
             method: 'POST',
             body: JSON.stringify({username: 'ale', password: 'as'})
         });
-        expect((await response.json()).message).toEqual('Unauthorized: Invalid credentials');
+        expect((await response.json()).message).toEqual('Unauthorized: Credenziali non valide');
     });
 
     test('POST /api/auth/login with Account registered & the right password', async () => {
@@ -35,7 +35,7 @@ describe("POST /api/auth/login", () => {
             method: 'POST',
             body: JSON.stringify({username: 'ale', password: 'ale'})
         });
-        expect((await response.json()).message).toEqual('Login successfull');
+        expect((await response.json()).message).toEqual('Login effettuato con successo');
     });
 
 });

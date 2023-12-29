@@ -31,10 +31,6 @@ describe("POST /api/annunci/new", () => {
 
     test("POST /api/annunci/new with correct arguments", async () =>{
         var token = jwt.sign({id: '658d9e3cf36dc1419f4a5b5d',email: 'utentegenerico1@email.com'}, process.env.jwt_secret, {expiresIn: 86400});
-        /*await fetch(url, {
-            method: 'POST',
-            body: JSON.stringify({username: 'utenteGenerico1', password: 'password'})
-        });*/
         const res = await fetch(url, {
             method: 'POST',
             headers: {
@@ -50,8 +46,6 @@ describe("POST /api/annunci/new", () => {
                 seller: "658d9e3cf36dc1419f4a5b5d"
             })
         });
-        //fail: Announce validation failed: seller: Path `seller` is required.
-        //??????
         expect((await res.json()).status).toEqual(201);
     });
 

@@ -1,3 +1,4 @@
+import { validateJWT } from "@/app/helpers/validatejwt";
 import { connectDB } from "../../../../../dbConfig";
 import Annunce from "@/app/models/announceModel";
 import { NextRequest, NextResponse } from "next/server";
@@ -7,17 +8,8 @@ connectDB();
 export async function GET(request: NextRequest) {
     try {
         let AnnunceList = [];
-        // console.log("hey");
-        // const body = await request.json();
-        // console.log(body);
-        // const newAnnunce = new Annunce(body);
-        // console.log(newAnnunce);
-        // newAnnunce.save();
-        // console.log(request);
         const searchUrl = request.nextUrl.searchParams.get("search");
-        // const search: string = reqBody.search;
-        // check if the string is a number
-        var search:string;
+        let search:string;
         if (searchUrl == null) {
             search = "";
         } else {
@@ -27,26 +19,24 @@ export async function GET(request: NextRequest) {
         const isNum = /^\d+$/.test(search);
         if (isNum) {
             AnnunceList = await Annunce.find({ ISBN: search });
-            // console.log(AnnunceList);
         } else {
             if (search.includes(':"')) {
                 const splitted = search.split('"');
+                // console.log(splitted);
                 const typeOfSearch = splitted[0].split(':')[0];
-                // const splitted2 = splitted[1].split('"');
                 const searchTerm = splitted[1];
-                //console.log(splitted, searchTerm);
                 if (typeOfSearch.toLowerCase() === "titolo") {
-                    AnnunceList = await Annunce.find({ title: searchTerm });
+                    AnnunceList = await Annunce.find({ title: {$regex:new RegExp(`.*${searchTerm}.*`,"i")} });
                     if (splitted.length > 3) {
                         AnnunceList = multiOptionFilter(splitted, AnnunceList);
                     }
                 } else if (typeOfSearch.toLowerCase() === "autore") {
-                    AnnunceList = await Annunce.find({ author: searchTerm });
+                    AnnunceList = await Annunce.find({ author: {$regex:new RegExp(`.*${searchTerm}.*`,"i")} });
                     if (splitted.length > 3) {
                         AnnunceList = multiOptionFilter(splitted, AnnunceList);
                     }
                 } else if (typeOfSearch.toLowerCase() === "categoria") {
-                    AnnunceList = await Annunce.find({ category: searchTerm });
+                    AnnunceList = await Annunce.find({ category: {$regex:new RegExp(`.*${searchTerm}.*`,"i")} });
                     if (splitted.length > 3) {
                         AnnunceList = multiOptionFilter(splitted, AnnunceList);
                     }
@@ -57,20 +47,39 @@ export async function GET(request: NextRequest) {
                     }
                 }
             } else {
-                AnnunceList = await Annunce.find({ title: search });
+                if (search === "last") { // this is a search for the last 3 annunces used only on the home page
+                    // console.log(AnnunceList = await Annunce.find());
+                    AnnunceList = await Annunce.find().sort({ _id: -1 }).limit(3);
+                    return NextResponse.json({
+                        message: "Ricerca effettuata con successo",
+                        data: AnnunceList},
+                        {status: 200}
+                        )
+                } else if (search === "user") { // this is a search by userId used only for the profile page so dosn't need to be filtered more
+                    const userId = await validateJWT(request);
+                    // console.log(userId);
+                    AnnunceList = await Annunce.find({ seller: userId });
+                    // console.log(AnnunceList);
+                    return NextResponse.json({
+                        message: "Ricerca effettuata con successo",
+                        data: AnnunceList},
+                        {status: 200}
+                        )
+                }
+                // console.log("searching for: " + search);
+                AnnunceList = await Annunce.find({ title: {$regex:new RegExp(`.*${search}.*`,"i")} });
             }
-            // const title = search;
-            // AnnunceList = await Annunce.find({ title: title });
         }
         return NextResponse.json({
-            message: "Search completed successfully",
+            message: "Ricerca effettuata con successo",
             data: AnnunceList,
-            status: 200})
+            status: 200
+        })
     } catch (error: any) {
         console.log(error);
         return NextResponse.json({
-            message: "Bad request",//error.message,
-            status: 400});
+            message: "Bad request: " + error.message,
+            status: 400}, {status: 400});
     }
 }
 
@@ -80,21 +89,21 @@ function multiOptionFilter(splitted: string[], AnnunceList: any[]): any[] {
         const search = splitted[i + 1];
         if (searchType == "autore") {
             AnnunceList = AnnunceList.filter((annunce) => {
-                return annunce.author === search;
+                return annunce.author.toLowerCase().includes(search.toLowerCase());
             });
         } else if (searchType == "categoria") {
             AnnunceList = AnnunceList.filter((annunce) => {
-                return annunce.category === search;
+                return annunce.category.toLowerCase().includes(search.toLowerCase());
             });
         } else if (searchType == "isbn") {
-            console.log("isbn");
+            // console.log("isbn");
             AnnunceList = AnnunceList.filter((annunce) => {
                 return annunce.ISBN === search;
             });
-            console.log(AnnunceList);
+            // console.log(AnnunceList);
         } else if (searchType == "titolo") {
             AnnunceList = AnnunceList.filter((annunce) => {
-                return annunce.title === search;
+                return annunce.title.toLowerCase().includes(search.toLowerCase());
             });
         }
     }

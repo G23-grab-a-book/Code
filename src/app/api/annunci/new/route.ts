@@ -12,12 +12,16 @@ export async function POST(request: NextRequest) {
         const newAd = new Ad(reqBody);
         newAd.seller = userId;
         await newAd.save();
+
         return NextResponse.json({
-            message: "Ad created successfully",
+            message: "Annuncio creato con successo",
             data: newAd,
-            status: 201,
-            })
+            status: 201}, {status: 201}
+        )
     } catch (error: any) {
-        return NextResponse.json({message: error.message, status: 400});
+        return NextResponse.json({
+            message: "Bad request: " + error.message,
+            status: 400
+        }, {status: 400});
     }
 }

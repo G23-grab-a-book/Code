@@ -1,9 +1,9 @@
 const url = "http://localhost:3000/api/annunci/ricerca?search=";
 const validParams = "autore:\"test_author\"";
-const emptyParams = "";
+const isbn = "8806177451"
+const isbn_wrong = "8806577451"
 const mongoose = require('mongoose');
 require("dotenv").config();
-// const fetch = require('node-fetch');
 
 describe("GET /api/annunci/ricerca", () => {
     beforeAll( async () => {
@@ -20,8 +20,15 @@ describe("GET /api/annunci/ricerca", () => {
         expect((await res.json()).data.length).toBeGreaterThanOrEqual(0);
     });
 
-    test("GET with empty search parameters", async () => {
-        const res = await fetch(url+emptyParams, {
+    test("GET with ISBN", async () => {
+        const res = await fetch(url+isbn, {
+            method: 'GET'
+        })
+        expect((await res.json()).data.length).toEqual(1);
+    });
+
+    test("GET with wrong ISBN", async () => {
+        const res = await fetch(url+isbn_wrong, {
             method: 'GET'
         })
         expect((await res.json()).data.length).toEqual(0);

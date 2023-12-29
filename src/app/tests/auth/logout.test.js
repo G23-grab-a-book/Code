@@ -23,7 +23,7 @@ describe("GET /api/auth/logout", () => {
                 cookie: `token=${token}`
             }
         });
-        expect((await response.json()).message).toEqual('Logout successful');
+        expect((await response.json()).message).toEqual('Logout effettuato con successo!');
     });
 
     test('GET /api/auth/logout with not Logged Account', async () => {
@@ -31,7 +31,7 @@ describe("GET /api/auth/logout", () => {
         var response = await fetch(url, {
             method: 'GET',
         });
-        expect((await response.json()).message).toEqual("Wasn't logged in");
+        expect((await response.json()).message).toEqual("Nessun profilo collegato");
     });
 
 });
