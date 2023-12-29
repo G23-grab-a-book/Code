@@ -10,6 +10,7 @@ import axios from "axios";
 import logo from "../../public/Logo.png";
 import Image from "next/image";
 import {Tooltip} from "react-tooltip";
+import {cookies} from "next/headers";
 
 const Header = () => {
 
@@ -18,13 +19,19 @@ const Header = () => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
+
   const isLogged = async () =>{
-    try{
-      const val = await axios.get("api/user");
+    if(pathname == "/annunci/new"){
       setLogged(true);
-    }catch (e){
-      // console.log("not logged");
-      setLogged(false);
+    }
+    else{
+      try{
+        const val = await axios.get("api/user");
+        setLogged(true);
+      }catch (e){
+        // console.log("not logged");
+        setLogged(false);
+      }
     }
   }
   useEffect(() => {
