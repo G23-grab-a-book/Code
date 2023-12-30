@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
         )
     } catch (error: any) {
         return NextResponse.json({
-            message: error.message,
+            message: "Bad request: " + error.message,
             status: 400
         }, {status: 400});
     }

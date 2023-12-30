@@ -14,10 +14,10 @@ export async function POST(request: NextRequest) {
         const userExists = await User.findOne({ username: reqBody.username });
 
         if (emailExists) {
-            throw new Error("Email already exists");
+            throw new Error("Email già esistente");
         }
         if (userExists) {
-            throw new Error("Username already exists");
+            throw new Error("Nome utente già esistente");
         }
         // create new user
         // random string
@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
         const newUser = new User(reqBody);
         await newUser.save();
         return NextResponse.json({
-            message: "User created successfully",
+            message: "Utente creato con successo",
             data: newUser,
             status:201}, {status: 201});
     } catch (error: any) {

@@ -10,6 +10,7 @@ import axios from "axios";
 import logo from "../../public/Logo.png";
 import Image from "next/image";
 import {Tooltip} from "react-tooltip";
+import {cookies} from "next/headers";
 
 const Header = () => {
 
@@ -18,11 +19,10 @@ const Header = () => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
+
   const isLogged = async () =>{
     try{
-      alert("try");
       const val = await axios.get("/api/user");
-      alert("logged");
       setLogged(true);
     }catch (e){
       // console.log("not logged");

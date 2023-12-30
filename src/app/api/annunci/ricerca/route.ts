@@ -51,7 +51,7 @@ export async function GET(request: NextRequest) {
                     // console.log(AnnunceList = await Annunce.find());
                     AnnunceList = await Annunce.find().sort({ _id: -1 }).limit(3);
                     return NextResponse.json({
-                        message: "Search completed successfully",
+                        message: "Ricerca effettuata con successo",
                         data: AnnunceList},
                         {status: 200}
                         )
@@ -61,7 +61,7 @@ export async function GET(request: NextRequest) {
                     AnnunceList = await Annunce.find({ seller: userId });
                     // console.log(AnnunceList);
                     return NextResponse.json({
-                        message: "Search completed successfully",
+                        message: "Ricerca effettuata con successo",
                         data: AnnunceList},
                         {status: 200}
                         )
@@ -71,14 +71,14 @@ export async function GET(request: NextRequest) {
             }
         }
         return NextResponse.json({
-            message: "Search completed successfully",
+            message: "Ricerca effettuata con successo",
             data: AnnunceList,
             status: 200
         })
     } catch (error: any) {
         console.log(error);
         return NextResponse.json({
-            message: "Bad request",
+            message: "Bad request: " + error.message,
             status: 400}, {status: 400});
     }
 }

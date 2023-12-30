@@ -12,19 +12,19 @@ export async function POST(request: NextRequest) {
         // check if user exists in the DB or not
         const user = await User.findOne({ username: reqBody.username });
         if (!user) {
-            throw new Error("User does not exist");
+            throw new Error("Nome utente non esistente");
         }
         // password match
         const passwordMatch = await bcrypt.compare(reqBody.password, user.password);
         
         if (!passwordMatch) {
-            throw new Error("Invalid credentials");
+            throw new Error("Credenziali non valide");
         }
         // create token
         const token = jwt.sign({ id: user._id }, process.env.jwt_secret!, { expiresIn: "7d" });
         
         const response = NextResponse.json({
-            message: "Login successfull",
+            message: "Login effettuato con successo",
             status:200})
         response.cookies.set("token", token, {
             httpOnly: true,
