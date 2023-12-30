@@ -20,7 +20,9 @@ const Header = () => {
 
   const isLogged = async () =>{
     try{
-      const val = await axios.get("api/user");
+      alert("try");
+      const val = await axios.get("/api/user");
+      alert("logged");
       setLogged(true);
     }catch (e){
       // console.log("not logged");
