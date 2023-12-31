@@ -161,7 +161,7 @@ function Profile() {
 
     return (
         <div className="text">
-            <h1 className="mt-3 ml-5">Hi {username},</h1>
+            <h1 className="mt-3 ml-5">Ciao {username},</h1>
             <div className="flex justify-start mt-10">
                 <div className="grid">
                     <div className="grid-item-left">
