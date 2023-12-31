@@ -35,13 +35,13 @@
                 "type": "object",
                 "properties": {
                   "email": {
-                    "$ref": "#/definitions/dati_utente/properties/email"
+                    "$ref": "#/components/schemas/dati_utente/properties/email"
                   },
                   "username": {
-                    "$ref": "#/definitions/dati_utente/properties/username"
+                    "$ref": "#/components/schemas/dati_utente/properties/username"
                   },
                   "password": {
-                    "$ref": "#/definitions/dati_utente/properties/password"
+                    "$ref": "#/components/schemas/dati_utente/properties/password"
                   }
                 }
               }
@@ -57,13 +57,13 @@
                   "type": "object",
                   "properties": {
                     "email": {
-                      "$ref": "#/definitions/dati_utente/properties/email"
+                      "$ref": "#/components/schemas/dati_utente/properties/email"
                     },
                     "username": {
-                      "$ref": "#/definitions/dati_utente/properties/username"
+                      "$ref": "#/components/schemas/dati_utente/properties/username"
                     },
                     "password": {
-                      "$ref": "#/definitions/dati_utente/properties/password"
+                      "$ref": "#/components/schemas/dati_utente/properties/password"
                     }
                   }
                 }
@@ -91,10 +91,10 @@
                 "type": "object",
                 "properties": {
                   "username": {
-                    "$ref": "#/definitions/dati_utente/properties/username"
+                    "$ref": "#/components/schemas/dati_utente/properties/username"
                   },
                   "password": {
-                    "$ref": "#/definitions/dati_utente/properties/password"
+                    "$ref": "#/components/schemas/dati_utente/properties/password"
                   }
                 }
               }
@@ -129,16 +129,16 @@
         "tags": [
           "Utenti"
         ],
-        "summary": "Usa il token dell'utente o quello passato come parametro per ottenre la sua email e il suo",
+        "summary": "Usa il token dell'utente o quello passato come parametro per ottenre la sua email e il suo username",
         "parameters": [
           {
             "name": "user",
             "in": "query",
-            "description": "passare l'userId; se non viene passato nulla l'id viene ricavato dal token creato dall'autenticazione",
+            "description": "passare l'userId; se non viene passato nulla l'id viene ricavato dal token creato all'autenticazione",
             "required": false,
             "schema": {
               "type": "string",
-              "example": "658c8eea435925670d23dcf1"
+              "example": "658dbad5cc413df122834fa2"
             }
           }
         ],
@@ -151,10 +151,10 @@
                   "type": "object",
                   "properties": {
                     "email": {
-                      "$ref": "#/definitions/dati_utente/properties/email"
+                      "$ref": "#/components/schemas/dati_utente/properties/email"
                     },
                     "username": {
-                      "$ref": "#/definitions/dati_utente/properties/username"
+                      "$ref": "#/components/schemas/dati_utente/properties/username"
                     }
                   }
                 }
@@ -180,13 +180,13 @@
                 "type": "object",
                 "properties": {
                   "email": {
-                    "$ref": "#/definitions/dati_utente/properties/email"
+                    "$ref": "#/components/schemas/dati_utente/properties/email"
                   },
                   "username": {
-                    "$ref": "#/definitions/dati_utente/properties/username"
+                    "$ref": "#/components/schemas/dati_utente/properties/username"
                   },
                   "password": {
-                    "$ref": "#/definitions/dati_utente/properties/password"
+                    "$ref": "#/components/schemas/dati_utente/properties/password"
                   }
                 }
               }
@@ -195,7 +195,7 @@
         },
         "responses": {
           "200": {
-            "description": "Account aggiornato correttament"
+            "description": "Account aggiornato correttamente"
           },
           "400": {
             "description": "I dati inseriti corrispondono a un utente nel database e quindi non è possibile modificare il profilo con quei dati"
@@ -218,22 +218,22 @@
                 "type": "object",
                 "properties": {
                   "title": {
-                    "$ref": "#/definitions/annuncio/properties/titolo"
+                    "$ref": "#/components/schemas/annuncio/properties/titolo"
                   },
                   "author": {
-                    "$ref": "#/definitions/annuncio/properties/autore"
+                    "$ref": "#/components/schemas/annuncio/properties/autore"
                   },
                   "category": {
-                    "$ref": "#/definitions/annuncio/properties/categoria"
+                    "$ref": "#/components/schemas/annuncio/properties/categoria"
                   },
                   "ISBN": {
-                    "$ref": "#/definitions/annuncio/properties/ISBN"
+                    "$ref": "#/components/schemas/annuncio/properties/ISBN"
                   },
                   "price": {
-                    "$ref": "#/definitions/annuncio/properties/prezzo"
+                    "$ref": "#/components/schemas/annuncio/properties/prezzo"
                   },
                   "condition": {
-                    "$ref": "#/definitions/annuncio/properties/condizione"
+                    "$ref": "#/components/schemas/annuncio/properties/condizione"
                   }
                 }
               }
@@ -249,25 +249,25 @@
                   "type": "object",
                   "properties": {
                     "title": {
-                      "$ref": "#/definitions/annuncio/properties/titolo"
+                      "$ref": "#/components/schemas/annuncio/properties/titolo"
                     },
                     "author": {
-                      "$ref": "#/definitions/annuncio/properties/autore"
+                      "$ref": "#/components/schemas/annuncio/properties/autore"
                     },
                     "category": {
-                      "$ref": "#/definitions/annuncio/properties/categoria"
+                      "$ref": "#/components/schemas/annuncio/properties/categoria"
                     },
                     "ISBN": {
-                      "$ref": "#/definitions/annuncio/properties/ISBN"
+                      "$ref": "#/components/schemas/annuncio/properties/ISBN"
                     },
                     "price": {
-                      "$ref": "#/definitions/annuncio/properties/prezzo"
+                      "$ref": "#/components/schemas/annuncio/properties/prezzo"
                     },
                     "condition": {
-                      "$ref": "#/definitions/annuncio/properties/condizione"
+                      "$ref": "#/components/schemas/annuncio/properties/condizione"
                     },
                     "seller": {
-                      "$ref": "#/definitions/annuncio/properties/venditore"
+                      "$ref": "#/components/schemas/annuncio/properties/venditore"
                     }
                   }
                 }
@@ -309,25 +309,25 @@
                     "type": "object",
                     "properties": {
                       "titolo": {
-                        "$ref": "#/definitions/annuncio/properties/titolo"
+                        "$ref": "#/components/schemas/annuncio/properties/titolo"
                       },
                       "autore": {
-                        "$ref": "#/definitions/annuncio/properties/autore"
+                        "$ref": "#/components/schemas/annuncio/properties/autore"
                       },
                       "categoria": {
-                        "$ref": "#/definitions/annuncio/properties/categoria"
+                        "$ref": "#/components/schemas/annuncio/properties/categoria"
                       },
                       "ISBN": {
-                        "$ref": "#/definitions/annuncio/properties/ISBN"
+                        "$ref": "#/components/schemas/annuncio/properties/ISBN"
                       },
                       "prezzo": {
-                        "$ref": "#/definitions/annuncio/properties/prezzo"
+                        "$ref": "#/components/schemas/annuncio/properties/prezzo"
                       },
                       "condizione": {
-                        "$ref": "#/definitions/annuncio/properties/condizione"
+                        "$ref": "#/components/schemas/annuncio/properties/condizione"
                       },
                       "venditore": {
-                        "$ref": "#/definitions/annuncio/properties/venditore"
+                        "$ref": "#/components/schemas/annuncio/properties/venditore"
                       }
                     }
                   }
@@ -355,7 +355,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "658d9f02f36dc1419f4a5b68"
+              "example": "658ea421a7e423fee0ececda"
             }
           }
         ],
@@ -368,25 +368,25 @@
                   "type": "object",
                   "properties": {
                     "titolo": {
-                      "$ref": "#/definitions/annuncio/properties/titolo"
+                      "$ref": "#/components/schemas/annuncio/properties/titolo"
                     },
                     "autore": {
-                      "$ref": "#/definitions/annuncio/properties/autore"
+                      "$ref": "#/components/schemas/annuncio/properties/autore"
                     },
                     "categoria": {
-                      "$ref": "#/definitions/annuncio/properties/categoria"
+                      "$ref": "#/components/schemas/annuncio/properties/categoria"
                     },
                     "ISBN": {
-                      "$ref": "#/definitions/annuncio/properties/ISBN"
+                      "$ref": "#/components/schemas/annuncio/properties/ISBN"
                     },
                     "prezzo": {
-                      "$ref": "#/definitions/annuncio/properties/prezzo"
+                      "$ref": "#/components/schemas/annuncio/properties/prezzo"
                     },
                     "condizione": {
-                      "$ref": "#/definitions/annuncio/properties/condizione"
+                      "$ref": "#/components/schemas/annuncio/properties/condizione"
                     },
                     "venditore": {
-                      "$ref": "#/definitions/annuncio/properties/venditore"
+                      "$ref": "#/components/schemas/annuncio/properties/venditore"
                     }
                   }
                 }
@@ -427,6 +427,66 @@
     }
   },
   "components": {
+    "schemas": {
+      "dati_utente": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "658c8eea435925670d23dcf1"
+          },
+          "email": {
+            "type": "string",
+            "example": "nuova.email@mail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "NuovaPassword"
+          },
+          "username": {
+            "type": "string",
+            "example": "username"
+          }
+        }
+      },
+      "annuncio": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "658d9f02f36dc1419f4a5b68"
+          },
+          "titolo": {
+            "type": "string",
+            "example": "Le cronache di Narnia"
+          },
+          "autore": {
+            "type": "string",
+            "example": "C. S. Lewis"
+          },
+          "categoria": {
+            "type": "string",
+            "example": "Fantasy"
+          },
+          "ISBN": {
+            "type": "string",
+            "example": "8022264753845"
+          },
+          "prezzo": {
+            "type": "number",
+            "example": 15.6
+          },
+          "condizione": {
+            "type": "string",
+            "example": "buono"
+          },
+          "venditore": {
+            "type": "string",
+            "example": "658d9e3cf36dc1419f4a5b5d"
+          }
+        }
+      }
+    },
     "securitySchemes": {
       "cookieAuth": {
         "type": "apiKey",
@@ -439,65 +499,5 @@
     {
       "cookieAuth": []
     }
-  ],
-  "definitions": {
-    "dati_utente": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "example": "658c8eea435925670d23dcf1"
-        },
-        "email": {
-          "type": "string",
-          "example": "nuova.email@mail.com"
-        },
-        "password": {
-          "type": "string",
-          "example": "NuovaPassword"
-        },
-        "username": {
-          "type": "string",
-          "example": "username"
-        }
-      }
-    },
-    "annuncio": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "example": "658d9f02f36dc1419f4a5b68"
-        },
-        "titolo": {
-          "type": "string",
-          "example": "Le cronache di Narnia"
-        },
-        "autore": {
-          "type": "string",
-          "example": "C. S. Lewis"
-        },
-        "categoria": {
-          "type": "string",
-          "example": "Fantasy"
-        },
-        "ISBN": {
-          "type": "string",
-          "example": "8022264753845"
-        },
-        "prezzo": {
-          "type": "float",
-          "example": 15.6
-        },
-        "condizione": {
-          "type": "string",
-          "example": "buono"
-        },
-        "venditore": {
-          "type": "string",
-          "example": "658d9e3cf36dc1419f4a5b5d"
-        }
-      }
-    }
-  }
+  ]
 }
