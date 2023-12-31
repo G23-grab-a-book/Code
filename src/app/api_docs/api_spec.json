@@ -119,7 +119,7 @@
         "summary": "Permette di fare il logout",
         "responses": {
           "200": {
-            "description": "Logout eseguito con successo"
+            "description": "Logout eseguito con successo/Nessun profilo connesso"
           }
         }
       }
