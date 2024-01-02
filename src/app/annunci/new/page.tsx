@@ -80,9 +80,15 @@ function AddAnnuncio() {
                     <Input type='text' />
                 </Form.Item>
                 <Form.Item name="price" label="Prezzo"
-                    rules={RequiredField('Seleziona un prezzo')}
+                    rules={[
+                        ...RequiredField('Seleziona un prezzo'),
+                        {
+                            validator: (_, value) =>
+                                value >= 0 ? Promise.resolve() : Promise.reject(new Error('Il prezzo non può essere negativo')),
+                        },
+                    ]}
                     initialValue={''}>
-                    <Input type='number' />
+                    <Input type='number' min={'0'}/>
                 </Form.Item>
                 <Form.Item name="condition" label="Condizione"
                     rules={RequiredField('Seleziona una condizione')}
