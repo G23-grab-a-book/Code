@@ -4,7 +4,7 @@ import axios from "axios";
 import { Button, Spin } from "antd";
 import Popup from "reactjs-popup";
 import 'reactjs-popup/dist/index.css';
-import router, { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState, } from "react"
 import "./annunci_page.css"
 import Link from "next/link";

@@ -2,15 +2,13 @@
 import React, {useEffect, useState} from 'react';
 import { Input, Button, message } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-
-
 import './header.css';// File CSS per lo stile dell'header
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
 import logo from "../../public/Logo.png";
 import Image from "next/image";
 import {Tooltip} from "react-tooltip";
-import {cookies} from "next/headers";
+
 
 const Header = () => {
 

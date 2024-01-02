@@ -54,7 +54,7 @@ function Login() {
                         initialValue={''}>
                         <Input type='text' />
                     </Form.Item>
-                    <Form.Item name="password" label="password"
+                    <Form.Item name="password" label="Password"
                         rules={RequiredField('Please insert the password')}
                         initialValue={''}>
                         <Input type='password' />
