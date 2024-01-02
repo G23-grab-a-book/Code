@@ -67,6 +67,7 @@ export async function GET(request: NextRequest) {
                         )
                 }
                 // console.log("searching for: " + search);
+                search = search.replace(/\*/g, "\\*");
                 AnnunceList = await Annunce.find({ title: {$regex:new RegExp(`.*${search}.*`,"i")} });
             }
         }
